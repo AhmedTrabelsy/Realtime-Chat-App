@@ -1,19 +1,19 @@
 <template>
   <div id="app" :style="{ backgroundImage: 'url(' + background + ')' }">
     <login-page />
-    <chatPage />
+    <!-- <chatPage /> -->
   </div>
 </template>
 
 <script>
 import loginPage from "@/components/login-page.vue";
-import chatPage from "@/components/chat-page.vue";
+// import chatPage from "@/components/chat-page.vue";
 
 export default {
   name: "app",
   components: {
     loginPage,
-    chatPage,
+    // chatPage,
   },
   data() {
     return {
@@ -35,6 +35,7 @@ body {
 * {
   margin: 0;
   padding: 0;
+  font-family: "Montserrat", sans-serif;
 }
 
 #app {
@@ -45,4 +46,6 @@ body {
   height: 100vh;
   padding: 3vh 3vw 0 3vw;
 }
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
 </style>
