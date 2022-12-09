@@ -1,5 +1,9 @@
 <template>
   <div id="app" :style="{ backgroundImage: 'url(' + background + ')' }">
+    <router-link :to="{ name: 'login' }"> Login |</router-link>
+    <router-link :to="{ name: 'signup' }"> signup |</router-link>
+    <router-link :to="{ name: 'home' }"> home |</router-link>
+    <router-link :to="{ name: 'chat' }"> chat</router-link>
     <!-- <loginPage /> -->
     <!-- <signupPage /> -->
     <!-- <chatPage /> -->

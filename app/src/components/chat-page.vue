@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-between">
+  <div class="app d-flex">
     <div class="info"></div>
     <div class="chat"></div>
   </div>
@@ -20,24 +20,33 @@ export default {
   margin: 0;
   padding: 0;
 }
+.app {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
+.info,
+.chat {
+  background-color: rgba(251, 251, 251, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 30px;
+  background-clip: padding-box;
+}
 .info {
   width: 30vw;
   height: 93vh;
-  background-color: rgba(0, 45, 226, 0.1);
-  backdrop-filter: blur(30px);
   border: 5px solid transparent;
   border-radius: 20px;
-  background-clip: padding-box;
 }
 
 .chat {
   width: 63vw;
   height: 93vh;
-  background-color: rgba(202, 91, 248, 0.01);
-  backdrop-filter: blur(30px);
   border: 2px solid transparent;
   border-radius: 30px;
-  background-clip: padding-box;
 }
 </style>

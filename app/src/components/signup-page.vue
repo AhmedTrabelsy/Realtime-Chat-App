@@ -46,7 +46,9 @@
             />
             <label class="form-check-label" for="remember"
               >I agree to
-              <router-link @termsAccepted="termsAccepted" to="/terms&conditions"
+              <router-link
+                @termsAccepted="termsAccepted"
+                :to="{ name: 'terms&conditions' }"
                 >Terms and Conditions</router-link
               ></label
             >
@@ -58,7 +60,7 @@
         <div class="container login text-center mt-4">
           <p>
             Already Have an account ?
-            <router-link to="/login">Login</router-link>
+            <router-link :to="{ name: 'login' }">Login</router-link>
           </p>
         </div>
       </div>
@@ -103,7 +105,7 @@ export default {
 .signup {
   background-color: rgba(251, 251, 251, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(40px);
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 30px;
   background-clip: padding-box;

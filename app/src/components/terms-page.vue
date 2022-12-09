@@ -1,7 +1,7 @@
 <template>
   <div class="terms overflow-auto">
     <h2 style="text-align: center" class="text-light">
-      <b>TERMS AND CONDITIONS</b>
+      <b class="title">TERMS AND CONDITIONS</b>
     </h2>
     <hr class="text-light" />
     <p>Last updated: 2022-12-09</p>
@@ -433,7 +433,7 @@ export default {
 .terms {
   background-color: rgba(251, 251, 251, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(50px);
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 30px;
   background-clip: padding-box;
@@ -463,6 +463,9 @@ h3 {
     height: 85vh;
     padding: 6vw;
   }
+  .title {
+    font-size: large;
+  }
 }
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
 @media (min-width: 481px) {
@@ -478,6 +481,10 @@ h3 {
     width: 70vw;
     height: 85vh;
     padding: 2vw;
+  }
+
+  .title {
+    font-size: larger;
   }
 
   p,

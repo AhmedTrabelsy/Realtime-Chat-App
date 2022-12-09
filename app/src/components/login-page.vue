@@ -52,7 +52,7 @@
         <div class="container text-center mt-4">
           <p>
             Don't Have an account ?
-            <router-link to="/signup">Signup</router-link>
+            <router-link :to="{ name: 'signup' }">Signup</router-link>
           </p>
         </div>
       </div>
@@ -94,7 +94,7 @@ export default {
 .login {
   background-color: rgba(251, 251, 251, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(40px);
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 30px;
   background-clip: padding-box;
