@@ -1,5 +1,5 @@
 <template>
-  <div class="terms overflow-auto">
+  <div class="terms register-container overflow-auto">
     <termsConditions />
     <hr class="text-light" />
     <div class="container d-flex flex-column my-5">
@@ -27,21 +27,7 @@ export default {
 };
 </script>
 
-<style scoped>
-.terms {
-  background-color: rgba(251, 251, 251, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(50px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 30px;
-  background-clip: padding-box;
-  padding: 5vw;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
+<style>
 /* Small devices (landscape phones, 576px and up) */
 @media (max-width: 480px) {
   .terms {
