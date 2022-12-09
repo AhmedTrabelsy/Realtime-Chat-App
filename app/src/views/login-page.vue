@@ -4,7 +4,7 @@
       <div class="login-logo container">
         <lottie animation="login" />
       </div>
-      <div class="login-form-container">
+      <div class="register-form-container">
         <register-header page="login" />
         <form
           @submit.prevent="handleSubmit"
@@ -42,7 +42,7 @@
             />
             <label class="form-check-label" for="remember">Remember me</label>
           </div>
-          <button type="submit" class="btn btn-outline-danger submit-login">
+          <button type="submit" class="btn btn-outline-danger submit-register">
             Login
           </button>
         </form>
@@ -91,42 +91,16 @@ export default {
 </script>
 
 <style>
-input {
-  background: transparent;
-}
-
-h1,
-label,
-p {
-  color: #eee;
-}
-
-a {
-  color: #d9ae50;
-}
-
 /* Small devices (landscape phones, 576px and up) */
 @media (max-width: 480px) {
   .login-logo {
     width: 200px;
-  }
-
-  .submit-login {
-    margin-top: 30px;
   }
 }
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
 @media (min-width: 481px) {
   .login-logo {
     width: 200px;
-  }
-
-  .login-form-container {
-    padding: 0 100px;
-  }
-
-  .submit-login {
-    margin-top: 30px;
   }
 }
 /* Large devices (desktops, 992px and up) */
@@ -135,18 +109,10 @@ a {
     width: 300px;
   }
 
-  .login-form-container {
-    padding: 0 100px;
-  }
-
   p,
   label,
   a {
     font-size: large;
-  }
-
-  .submit-login {
-    margin-top: 50px;
   }
 }
 </style>
