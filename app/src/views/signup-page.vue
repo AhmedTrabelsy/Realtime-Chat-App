@@ -1,14 +1,11 @@
 <template>
   <div class="d-flex justify-content-center">
-    <div class="signup">
+    <div class="register-container">
       <div class="signup-logo container">
         <lottie animation="signup" />
       </div>
       <div class="signup-form-container">
-        <div class="container mb-3">
-          <h1 class="display-3">Signup</h1>
-          <p>Welcome back please create new account</p>
-        </div>
+        <register-header page="signup" />
         <form
           @submit.prevent="handleSubmit"
           class="container d-flex flex-column"
@@ -70,11 +67,13 @@
 
 <script>
 import lottie from "@/components/lottie.vue";
+import registerHeader from "@/components/register-header.vue";
 
 export default {
   name: "signupPage",
   components: {
     lottie,
+    registerHeader,
   },
   data() {
     return {
@@ -101,8 +100,8 @@ export default {
 };
 </script>
 
-<style scoped>
-.signup {
+<style>
+.register-container {
   background-color: rgba(251, 251, 251, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(40px);
@@ -132,7 +131,7 @@ a {
 
 /* Small devices (landscape phones, 576px and up) */
 @media (max-width: 480px) {
-  .signup {
+  .register-container {
     width: 90vw;
     height: 85vh;
   }
@@ -146,7 +145,7 @@ a {
 }
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
 @media (min-width: 481px) {
-  .signup {
+  .register-container {
     width: 70vw;
     height: 85vh;
     padding: 0 2vw;
@@ -166,7 +165,7 @@ a {
 }
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 1600px) {
-  .signup {
+  .register-container {
     width: 40vw;
     height: 85vh;
     padding: 2vw;

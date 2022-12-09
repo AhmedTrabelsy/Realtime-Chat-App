@@ -1,14 +1,11 @@
 <template>
   <div class="d-flex justify-content-center">
-    <div class="login">
+    <div class="register-container">
       <div class="login-logo container">
         <lottie animation="login" />
       </div>
       <div class="login-form-container">
-        <div class="container mb-3">
-          <h1 class="display-3">Login</h1>
-          <p>Welcome back please login to your account</p>
-        </div>
+        <register-header page="login" />
         <form
           @submit.prevent="handleSubmit"
           class="container d-flex flex-column"
@@ -62,11 +59,13 @@
 
 <script>
 import lottie from "@/components/lottie.vue";
+import registerHeader from "@/components/register-header.vue";
 
 export default {
   name: "loginPage",
   components: {
     lottie,
+    registerHeader,
   },
   data() {
     return {
@@ -91,21 +90,7 @@ export default {
 };
 </script>
 
-<style scoped>
-.login {
-  background-color: rgba(251, 251, 251, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(40px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 30px;
-  background-clip: padding-box;
-  padding: 5vw;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
+<style>
 input {
   background: transparent;
 }
@@ -122,10 +107,6 @@ a {
 
 /* Small devices (landscape phones, 576px and up) */
 @media (max-width: 480px) {
-  .login {
-    width: 90vw;
-    height: 85vh;
-  }
   .login-logo {
     width: 200px;
   }
@@ -136,11 +117,6 @@ a {
 }
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
 @media (min-width: 481px) {
-  .login {
-    width: 70vw;
-    height: 85vh;
-    padding: 0 2vw;
-  }
   .login-logo {
     width: 200px;
   }
@@ -155,12 +131,6 @@ a {
 }
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 1100px) {
-  .login {
-    width: 40vw;
-    height: 85vh;
-    padding: 2vw;
-  }
-
   .login-logo {
     width: 300px;
   }
