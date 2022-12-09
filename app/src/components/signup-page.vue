@@ -45,7 +45,10 @@
               required
             />
             <label class="form-check-label" for="remember"
-              >I agree to <a href="">Terms and Conditions</a></label
+              >I agree to
+              <router-link @termsAccepted="termsAccepted" to="/terms&conditions"
+                >Terms and Conditions</router-link
+              ></label
             >
           </div>
           <button type="submit" class="btn btn-outline-danger submit-signup">
@@ -53,7 +56,10 @@
           </button>
         </form>
         <div class="container login text-center mt-4">
-          <p>Already Have an account ? <a href="">Login</a></p>
+          <p>
+            Already Have an account ?
+            <router-link to="/login">Login</router-link>
+          </p>
         </div>
       </div>
     </div>
@@ -72,7 +78,7 @@ export default {
       signup,
       email: "",
       password: "",
-      rememberMe: false,
+      termsAcc: false,
       passwordError: "",
     };
   },
@@ -85,6 +91,9 @@ export default {
       console.log(this.email);
       console.log(this.password);
       console.log(this.rememberMe);
+    },
+    termsAccepted() {
+      this.termsAcc = true;
     },
   },
 };
@@ -116,7 +125,7 @@ p {
 }
 
 a {
-  color: yellow;
+  color: #d9ae50;
 }
 
 /* Small devices (landscape phones, 576px and up) */

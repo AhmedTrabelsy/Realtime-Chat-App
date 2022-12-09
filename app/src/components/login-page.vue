@@ -50,7 +50,10 @@
           </button>
         </form>
         <div class="container text-center mt-4">
-          <p>Don't Have an account ? <a href="">SignUp</a></p>
+          <p>
+            Don't Have an account ?
+            <router-link to="/signup">Signup</router-link>
+          </p>
         </div>
       </div>
     </div>
@@ -113,7 +116,7 @@ p {
 }
 
 a {
-  color: yellow;
+  color: #d9ae50;
 }
 
 /* Small devices (landscape phones, 576px and up) */
