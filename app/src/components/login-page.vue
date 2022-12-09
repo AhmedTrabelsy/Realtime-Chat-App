@@ -32,7 +32,7 @@
               v-model="password"
               required
             />
-            <p v-if="passwordError != ''" class="text-warning password">
+            <p v-if="passwordError" class="text-warning password">
               {{ passwordError }}
             </p>
           </div>
