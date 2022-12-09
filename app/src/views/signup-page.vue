@@ -1,58 +1,31 @@
 <template>
   <div class="d-flex justify-content-center">
-    <div class="register-container">
+    <div class="glass-container centred-container">
       <div class="signup-logo container">
         <lottie animation="signup" />
       </div>
       <div class="register-form-container">
-        <register-header page="signup" />
-        <form
-          @submit.prevent="handleSubmit"
-          class="container d-flex flex-column"
-        >
+        <registerHeader page="signup" />
+        <form @submit.prevent="handleSubmit" class="container d-flex flex-column">
           <div class="form-group mb-3">
             <label for="email">Email address</label>
-            <input
-              type="email"
-              class="form-control bg-transparent mt-2"
-              id="email"
-              v-model="email"
-              required
-            />
+            <input type="email" class="form-control bg-transparent mt-2" id="email" v-model="email" required />
           </div>
           <div class="form-group mb-1">
             <label for="password">Password</label>
-            <input
-              type="password"
-              class="form-control bg-transparent mt-2"
-              id="password"
-              v-model="password"
-              required
-            />
+            <input type="password" class="form-control bg-transparent mt-2" id="password" v-model="password" required />
             <p v-if="passwordError" class="text-warning password">
               {{ passwordError }}
             </p>
           </div>
           <div class="form-check">
-            <input
-              type="checkbox"
-              class="form-check-input"
-              id="remember"
-              v-model="rememberMe"
-              required
-            />
-            <label class="form-check-label" for="remember"
-              >I agree to
-              <router-link
-                @termsAccepted="termsAccepted"
-                :to="{ name: 'terms&conditions' }"
-                >Terms and Conditions</router-link
-              ></label
-            >
+            <input type="checkbox" class="form-check-input" id="remember" v-model="rememberMe" required />
+            <label class="form-check-label" for="remember">
+              I agree to
+              <router-link @termsAccepted="termsAccepted" :to="{ name: 'terms&conditions' }"> Terms and Conditions </router-link>
+            </label>
           </div>
-          <button type="submit" class="btn btn-outline-danger submit-register">
-            Signup
-          </button>
+          <button type="submit" class="btn btn-outline-danger submit-register">Signup</button>
         </form>
         <div class="container login text-center mt-4">
           <p>
@@ -81,14 +54,12 @@ export default {
       password: "",
       termsAcc: false,
       passwordError: "",
+      rememberMe: false,
     };
   },
   methods: {
     handleSubmit() {
-      this.passwordError =
-        this.password.length >= 8
-          ? ""
-          : "Password must be at least 8 chars long !";
+      this.passwordError = this.password.length >= 8 ? "" : "Password must be at least 8 chars long !";
       console.log(this.email);
       console.log(this.password);
       console.log(this.rememberMe);
@@ -101,20 +72,6 @@ export default {
 </script>
 
 <style>
-.register-container {
-  background-color: rgba(251, 251, 251, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(40px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 30px;
-  background-clip: padding-box;
-  padding: 5vw;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
 input {
   background: transparent;
 }
@@ -131,64 +88,22 @@ a {
 
 /* Small devices (landscape phones, 576px and up) */
 @media (max-width: 480px) {
-  .register-container {
-    width: 90vw;
-    height: 85vh;
-  }
   .signup-logo {
-    width: 200px;
-  }
-
-  .submit-register {
-    margin-top: 30px;
+    width: 15em;
   }
 }
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
 @media (min-width: 481px) {
-  .register-container {
-    width: 70vw;
-    height: 85vh;
-    padding: 0 2vw;
-  }
   .signup-logo {
-    width: 180px;
+    width: 27vh;
     margin-top: 20px;
-  }
-
-  .register-form-container {
-    padding: 0 100px;
-  }
-
-  .submit-register {
-    margin-top: 30px;
   }
 }
 /* Large devices (desktops, 992px and up) */
-@media (min-width: 1600px) {
-  .register-container {
-    width: 40vw;
-    height: 85vh;
-    padding: 2vw;
-  }
-
+@media (min-width: 1100px) {
   .signup-logo {
-    width: 250px;
-    margin-top: 25px;
-    margin-bottom: 35px;
-  }
-
-  .register-form-container {
-    padding: 0 100px;
-  }
-
-  p,
-  label,
-  a {
-    font-size: large;
-  }
-
-  .submit-register {
-    margin-top: 50px;
+    width: 9rem;
+    margin-top: 10px;
   }
 }
 </style>

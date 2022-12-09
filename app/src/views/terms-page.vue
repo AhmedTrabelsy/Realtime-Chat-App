@@ -1,10 +1,11 @@
 <template>
-  <div class="terms register-container overflow-auto">
+  <div class="terms glass-container centred-container overflow-auto">
     <termsConditions />
     <hr class="text-light" />
     <div class="container d-flex flex-column my-5">
       <button @click="termsAccepted" class="btn btn-success">
-        I agree <i class="bi bi-check2-circle"></i>
+        I agree
+        <i class="bi bi-check2-circle"></i>
       </button>
     </div>
   </div>
