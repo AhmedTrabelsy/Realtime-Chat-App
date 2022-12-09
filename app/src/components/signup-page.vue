@@ -9,13 +9,17 @@
           <h1 class="display-3">Signup</h1>
           <p>Welcome back please create new account</p>
         </div>
-        <form class="container d-flex flex-column">
+        <form
+          @submit.prevent="handleSubmit"
+          class="container d-flex flex-column"
+        >
           <div class="form-group mb-3">
             <label for="email">Email address</label>
             <input
               type="email"
               class="form-control bg-transparent mt-2"
               id="email"
+              v-model="email"
               required
             />
           </div>
@@ -25,14 +29,19 @@
               type="password"
               class="form-control bg-transparent mt-2"
               id="password"
+              v-model="password"
               required
             />
+            <p v-if="passwordError != ''" class="text-warning password">
+              {{ passwordError }}
+            </p>
           </div>
           <div class="form-check">
             <input
               type="checkbox"
-              class="form-check-input text-danger"
+              class="form-check-input"
               id="remember"
+              v-model="rememberMe"
               required
             />
             <label class="form-check-label" for="remember"
@@ -61,7 +70,22 @@ export default {
     return {
       Vue3Lottie,
       signup,
+      email: "",
+      password: "",
+      rememberMe: false,
+      passwordError: "",
     };
+  },
+  methods: {
+    handleSubmit() {
+      this.passwordError =
+        this.password.length >= 8
+          ? ""
+          : "Password must be at least 8 chars long !";
+      console.log(this.email);
+      console.log(this.password);
+      console.log(this.rememberMe);
+    },
   },
 };
 </script>
@@ -138,7 +162,7 @@ a {
   }
 
   .signup-logo {
-    width: 300px;
+    width: 250px;
     margin-top: 25px;
     margin-bottom: 35px;
   }
@@ -147,7 +171,9 @@ a {
     padding: 0 100px;
   }
 
-  * {
+  p,
+  label,
+  a {
     font-size: large;
   }
 

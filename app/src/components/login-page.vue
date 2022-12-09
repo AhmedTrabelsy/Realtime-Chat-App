@@ -9,13 +9,18 @@
           <h1 class="display-3">Login</h1>
           <p>Welcome back please login to your account</p>
         </div>
-        <form class="container d-flex flex-column">
+        <form
+          @submit.prevent="handleSubmit"
+          class="container d-flex flex-column"
+        >
           <div class="form-group mb-3">
             <label for="email">Email address</label>
             <input
               type="email"
               class="form-control bg-transparent mt-2"
               id="email"
+              v-model="email"
+              required
             />
           </div>
           <div class="form-group mb-1">
@@ -24,10 +29,20 @@
               type="password"
               class="form-control bg-transparent mt-2"
               id="password"
+              v-model="password"
+              required
             />
+            <p v-if="passwordError != ''" class="text-warning password">
+              {{ passwordError }}
+            </p>
           </div>
           <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="remember" />
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="remember"
+              v-model="rememberMe"
+            />
             <label class="form-check-label" for="remember">Remember me</label>
           </div>
           <button type="submit" class="btn btn-outline-danger submit-login">
@@ -52,7 +67,22 @@ export default {
     return {
       Vue3Lottie,
       login,
+      email: "",
+      password: "",
+      rememberMe: false,
+      passwordError: "",
     };
+  },
+  methods: {
+    handleSubmit() {
+      this.passwordError =
+        this.password.length >= 8
+          ? ""
+          : "Password must be at least 8 chars long !";
+      console.log(this.email);
+      console.log(this.password);
+      console.log(this.rememberMe);
+    },
   },
 };
 </script>
@@ -135,7 +165,9 @@ a {
     padding: 0 100px;
   }
 
-  * {
+  p,
+  label,
+  a {
     font-size: large;
   }
 

@@ -1,21 +1,21 @@
 <template>
   <div id="app" :style="{ backgroundImage: 'url(' + background + ')' }">
-    <!-- <loginPage /> -->
-    <signupPage />
+    <loginPage />
+    <!-- <signupPage /> -->
     <!-- <chatPage /> -->
   </div>
 </template>
 
 <script>
-// import loginPage from "@/components/login-page.vue";
-import signupPage from "@/components/signup-page.vue";
+import loginPage from "@/components/login-page.vue";
+// import signupPage from "@/components/signup-page.vue";
 // import chatPage from "@/components/chat-page.vue";
 
 export default {
   name: "app",
   components: {
-    // loginPage,
-    signupPage,
+    loginPage,
+    // signupPage,
     // chatPage,
   },
   data() {
