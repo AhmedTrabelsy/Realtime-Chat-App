@@ -1,13 +1,13 @@
 <template>
   <div class="d-flex justify-content-center">
-    <div class="signup">
-      <div class="signup-logo container">
-        <Vue3Lottie :animationData="signup" />
+    <div class="login">
+      <div class="login-logo container">
+        <lottie animation="login" />
       </div>
-      <div class="signup-form-container">
+      <div class="login-form-container">
         <div class="container mb-3">
-          <h1 class="display-3">Signup</h1>
-          <p>Welcome back please create new account</p>
+          <h1 class="display-3">Login</h1>
+          <p>Welcome back please login to your account</p>
         </div>
         <form
           @submit.prevent="handleSubmit"
@@ -42,25 +42,17 @@
               class="form-check-input"
               id="remember"
               v-model="rememberMe"
-              required
             />
-            <label class="form-check-label" for="remember"
-              >I agree to
-              <router-link
-                @termsAccepted="termsAccepted"
-                :to="{ name: 'terms&conditions' }"
-                >Terms and Conditions</router-link
-              ></label
-            >
+            <label class="form-check-label" for="remember">Remember me</label>
           </div>
-          <button type="submit" class="btn btn-outline-danger submit-signup">
-            Signup
+          <button type="submit" class="btn btn-outline-danger submit-login">
+            Login
           </button>
         </form>
-        <div class="container login text-center mt-4">
+        <div class="container text-center mt-4">
           <p>
-            Already Have an account ?
-            <router-link :to="{ name: 'login' }">Login</router-link>
+            Don't Have an account ?
+            <router-link :to="{ name: 'signup' }">Signup</router-link>
           </p>
         </div>
       </div>
@@ -69,18 +61,19 @@
 </template>
 
 <script>
-import signup from "@/assets/animations/signup.json";
-import Vue3Lottie from "vue3-lottie";
+import lottie from "@/components/lottie.vue";
 
 export default {
-  name: "signupPage",
+  name: "loginPage",
+  components: {
+    lottie,
+  },
   data() {
     return {
-      Vue3Lottie,
-      signup,
+      lottie,
       email: "",
       password: "",
-      termsAcc: false,
+      rememberMe: false,
       passwordError: "",
     };
   },
@@ -94,15 +87,12 @@ export default {
       console.log(this.password);
       console.log(this.rememberMe);
     },
-    termsAccepted() {
-      this.termsAcc = true;
-    },
   },
 };
 </script>
 
 <style scoped>
-.signup {
+.login {
   background-color: rgba(251, 251, 251, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(40px);
@@ -132,53 +122,50 @@ a {
 
 /* Small devices (landscape phones, 576px and up) */
 @media (max-width: 480px) {
-  .signup {
+  .login {
     width: 90vw;
     height: 85vh;
   }
-  .signup-logo {
+  .login-logo {
     width: 200px;
   }
 
-  .submit-signup {
+  .submit-login {
     margin-top: 30px;
   }
 }
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
 @media (min-width: 481px) {
-  .signup {
+  .login {
     width: 70vw;
     height: 85vh;
     padding: 0 2vw;
   }
-  .signup-logo {
-    width: 180px;
-    margin-top: 20px;
+  .login-logo {
+    width: 200px;
   }
 
-  .signup-form-container {
+  .login-form-container {
     padding: 0 100px;
   }
 
-  .submit-signup {
+  .submit-login {
     margin-top: 30px;
   }
 }
 /* Large devices (desktops, 992px and up) */
-@media (min-width: 1600px) {
-  .signup {
+@media (min-width: 1100px) {
+  .login {
     width: 40vw;
     height: 85vh;
     padding: 2vw;
   }
 
-  .signup-logo {
-    width: 250px;
-    margin-top: 25px;
-    margin-bottom: 35px;
+  .login-logo {
+    width: 300px;
   }
 
-  .signup-form-container {
+  .login-form-container {
     padding: 0 100px;
   }
 
@@ -188,7 +175,7 @@ a {
     font-size: large;
   }
 
-  .submit-signup {
+  .submit-login {
     margin-top: 50px;
   }
 }

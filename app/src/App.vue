@@ -4,25 +4,14 @@
     <router-link :to="{ name: 'signup' }"> signup |</router-link>
     <router-link :to="{ name: 'home' }"> home |</router-link>
     <router-link :to="{ name: 'chat' }"> chat</router-link>
-    <!-- <loginPage /> -->
-    <!-- <signupPage /> -->
-    <!-- <chatPage /> -->
     <RouterView />
   </div>
 </template>
 
 <script>
-// import loginPage from "@/components/login-page.vue";
-// import signupPage from "@/components/signup-page.vue";
-// import chatPage from "@/components/chat-page.vue";
-
 export default {
   name: "app",
-  components: {
-    // loginPage,
-    // signupPage,
-    // chatPage,
-  },
+  components: {},
   data() {
     return {
       background: require("../src/assets/background.jpg"),
