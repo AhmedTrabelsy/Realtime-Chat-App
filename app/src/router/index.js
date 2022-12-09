@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
-import login from "../components/login-page.vue";
-import signup from "../components/signup-page.vue";
-import terms from "../views/terms-page.vue";
 import chat from "../views/chat-page.vue";
+import login from "../views/login-page.vue";
+import signup from "../views/signup-page.vue";
+import terms from "../views/terms-page.vue";
 
 const routes = [
   {

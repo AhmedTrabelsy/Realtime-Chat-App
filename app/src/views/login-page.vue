@@ -76,17 +76,6 @@ export default {
       passwordError: "",
     };
   },
-  methods: {
-    handleSubmit() {
-      this.passwordError =
-        this.password.length >= 8
-          ? ""
-          : "Password must be at least 8 chars long !";
-      console.log(this.email);
-      console.log(this.password);
-      console.log(this.rememberMe);
-    },
-  },
 };
 </script>
 
