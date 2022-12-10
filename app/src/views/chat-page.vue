@@ -1,18 +1,29 @@
 <template>
   <div class="main-page d-flex">
-    <!-- <div
-      class="info glass-container"
-      style="border: 5px solid transparent"
-    ></div> -->
-    <div class="chat glass-container overflow-auto d-flex flex-column-reverse" style="border: 2px solid transparent">
-      <div v-for="element in msgs" :key="element" :class="{ 'justify-content-end': element.sender, 'justify-content-start': !element.sender }" class="d-flex my-2">
-        <div class="bg-dark rounded-circle avatar me-2" v-if="!element.sender"></div>
-        <div class="bg-primary rounded text-light p-2">
-          <span>{{ element.msg }}</span>
+    <div class="info glass-container" style="border: 5px solid transparent"></div>
+    <div class="chat glass-container overflow-hidden" style="border: 2px solid transparent">
+      <div class="container messages overflow-auto">
+        <div
+          v-for="(element, index) in msgs"
+          :key="index"
+          :class="{
+            'justify-content-end': element.sender,
+            'justify-content-start': !element.sender,
+          }"
+          class="d-flex my-2"
+        >
+          <div class="bg-dark rounded-circle avatar me-2" v-if="!element.sender"></div>
+          <div class="bg-primary rounded text-light p-2">
+            <span>{{ element.msg }}</span>
+          </div>
+          <div class="bg-dark rounded-circle avatar ms-2" v-if="element.sender"></div>
         </div>
-        <div class="bg-dark rounded-circle avatar ms-2" v-if="element.sender"></div>
+        <div class="bottom" ref="bottom"></div>
       </div>
-      <input type="text" placeholder="Write here " />
+      <div class="d-flex fixed">
+        <input type="text" v-model="msgValue" class="card msg-input rounded-0" placeholder="Write here " />
+        <button type="submit" @click="sendMsg" class="sendBtn border btn btn-success rounded-0 px-4"><i class="bi bi-send"></i></button>
+      </div>
     </div>
   </div>
 </template>
@@ -23,6 +34,7 @@ export default {
   components: {},
   data() {
     return {
+      msgValue: "",
       msgs: [
         {
           msg: "Hello how are you ?",
@@ -111,10 +123,45 @@ export default {
       ],
     };
   },
+  mounted() {
+    this.goToBottom();
+  },
+  methods: {
+    goToBottom() {
+      this.$refs["bottom"].scrollIntoView({ behavior: "smooth" });
+    },
+    sendMsg() {
+      this.msgs.push({ msg: this.msgValue, sender: true });
+      this.msgValue = "";
+      this.goToBottom();
+    },
+  },
 };
 </script>
 
 <style>
+.messages {
+  height: 90vh;
+}
+
+.bottom {
+  width: 30px;
+  height: 50px;
+}
+
+.msg-input {
+  height: 50px;
+  width: 100%;
+  border: none;
+}
+.msg-input:focus {
+  outline: none;
+}
+
+.sendBtn {
+  padding: 0 40px;
+}
+
 p,
 span,
 a {
