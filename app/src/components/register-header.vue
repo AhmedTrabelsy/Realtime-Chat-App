@@ -7,12 +7,12 @@
     <h1 class="display-5">Signup</h1>
     <p>New Here ? Create An Account For Free</p>
   </div>
-  <hp v-else>Register Header Error</hp>
+  <h1 v-else>Register Header Error</h1>
 </template>
 
 <script>
 export default {
-  name: "register-header",
+  name: "registerHeader",
   data() {
     return {};
   },

@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-center">
     <div class="glass-container centred-container">
       <div class="signup-logo container">
-        <lottie animation="signup" />
+        <lottieVue animation="signup" />
       </div>
       <div class="register-form-container">
         <registerHeader page="signup" />
@@ -39,13 +39,13 @@
 </template>
 
 <script>
-import lottie from "@/components/lottie.vue";
+import lottieVue from "@/components/lottie.vue";
 import registerHeader from "@/components/register-header.vue";
 
 export default {
   name: "signupPage",
   components: {
-    lottie,
+    lottieVue,
     registerHeader,
   },
   data() {

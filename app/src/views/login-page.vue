@@ -1,7 +1,7 @@
 <template>
   <div class="glass-container centred-container">
     <div class="login-logo container">
-      <lottie animation="login" />
+      <lottieVue animation="login" />
     </div>
     <div class="register-form-container">
       <registerHeader page="login" />
@@ -34,18 +34,17 @@
 </template>
 
 <script>
-import lottie from "@/components/lottie.vue";
+import lottieVue from "@/components/lottie.vue";
 import registerHeader from "@/components/register-header.vue";
 
 export default {
   name: "loginPage",
   components: {
-    lottie,
+    lottieVue,
     registerHeader,
   },
   data() {
     return {
-      lottie,
       email: "",
       password: "",
       rememberMe: false,

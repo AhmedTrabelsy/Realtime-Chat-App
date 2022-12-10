@@ -1,7 +1,7 @@
 <template>
   <Vue3Lottie v-if="animation == 'login'" :animationData="login" />
   <Vue3Lottie v-else-if="animation == 'signup'" :animationData="signup" />
-  <hp v-else>Lottie not found</hp>
+  <h1 v-else>Lottie not found</h1>
 </template>
 
 <script>
@@ -10,7 +10,7 @@ import signup from "@/assets/animations/signup.json";
 import Vue3Lottie from "vue3-lottie";
 
 export default {
-  name: "lottie-vue",
+  name: "lottieVue",
   data() {
     return {
       Vue3Lottie,

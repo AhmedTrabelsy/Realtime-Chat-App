@@ -12,26 +12,24 @@
           }"
           class="d-flex my-2"
         >
-          <div class="bg-light rounded-circle avatar me-2" v-if="!element.sender"></div>
-          <p class="bg-primary msg-container rounded text-light p-2">
-            {{ element.msg }}
-          </p>
-          <div class="bg-warning rounded-circle avatar ms-2" v-if="element.sender"></div>
+          <messageComponent :msg="element.msg" :sender="element.sender" />
         </div>
         <div class="bottom" ref="bottom"></div>
       </div>
-      <form class="d-flex fixed" @keyup.enter="goToBottom">
-        <input type="text" v-model="msgValue" @focus="goToBottom" class="card msg-input rounded-0" placeholder="Write here " />
-        <button type="submit" @click.prevent="sendMsg" class="sendBtn border btn btn-success rounded-0 px-4"><i class="bi bi-send"></i></button>
+      <form class="d-flex fixed" @keyup.enter="sendMsg">
+        <input type="text" v-model="msgValue" @focus="goToBottom" class="card msg-input rounded-0 px-4" placeholder=" Type a message" />
+        <button v-if="msgValue" type="submit" @click.prevent="sendMsg" class="sendBtn border btn btn-success rounded-0 px-4"><i class="bi bi-send"></i></button>
       </form>
     </div>
   </div>
 </template>
 
 <script>
+import messageComponent from "@/components/message-component.vue";
+
 export default {
   name: "chatPage",
-  components: {},
+  components: { messageComponent },
   data() {
     return {
       msgValue: "",
@@ -131,8 +129,10 @@ export default {
       this.$refs["bottom"].scrollIntoView({ behavior: "smooth" });
     },
     sendMsg() {
-      this.msgs.push({ msg: this.msgValue, sender: true });
-      this.msgValue = "";
+      if (this.msgValue.length > 0) {
+        this.msgs.push({ msg: this.msgValue, sender: true });
+        this.msgValue = "";
+      }
       this.goToBottom();
     },
   },
@@ -140,6 +140,9 @@ export default {
 </script>
 
 <style>
+.receiver {
+  background-color: #f0f0f0;
+}
 .msg-container {
   max-width: 50vw;
   overflow: hidden;
@@ -224,7 +227,7 @@ a {
   p,
   label,
   a {
-    font-size: large;
+    font-size: small;
   }
 }
 </style>
