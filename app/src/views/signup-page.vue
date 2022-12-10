@@ -54,6 +54,7 @@ export default {
   },
   data() {
     return {
+      name: "",
       email: "",
       password: "",
       termsAcc: this.termsA,

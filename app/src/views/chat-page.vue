@@ -12,7 +12,7 @@
           }"
           class="d-flex my-2"
         >
-          <messageComponent :msg="element.msg" :sender="element.sender" />
+          <messageComponent :name="element.name" :msg="element.msg" :sender="element.sender" />
         </div>
         <div class="bottom" ref="bottom"></div>
       </div>
@@ -26,7 +26,6 @@
 
 <script>
 import messageComponent from "@/components/message-component.vue";
-
 export default {
   name: "chatPage",
   components: { messageComponent },
@@ -35,86 +34,107 @@ export default {
       msgValue: "",
       msgs: [
         {
+          name: "Ahmed",
           msg: "Hello how are you ?",
           sender: true,
         },
         {
+          name: "Ahmed",
           msg: "Im fine and you ?",
           sender: false,
         },
         {
+          name: "Ahmed",
           msg: "Im fine as well",
           sender: true,
         },
         {
+          name: "Ahmed",
           msg: "Thanks for asking !",
           sender: true,
         },
         {
+          name: "Ahmed",
           msg: "Good to hear that",
           sender: false,
         },
         {
+          name: "Ahmed",
           msg: "Take care and enjoy your life buddy",
           sender: true,
         },
         {
+          name: "Ahmed",
           msg: "You too have a wonderful day !",
           sender: false,
         },
         {
+          name: "Ahmed",
           msg: "You too have a wonderful day !",
           sender: true,
         },
         {
+          name: "Ahmed",
           msg: "You too have a wonderful day !",
           sender: false,
         },
         {
+          name: "Ahmed",
           msg: "You too have a wonderful day !",
           sender: true,
         },
         {
+          name: "Ahmed",
           msg: "You too have a wonderful day !",
           sender: true,
         },
         {
+          name: "Ahmed",
           msg: "You too have a wonderful day !",
           sender: true,
         },
         {
+          name: "Ahmed",
           msg: "You too have a wonderful day !",
           sender: false,
         },
         {
+          name: "Ahmed",
           msg: "You too have a wonderful day !",
           sender: true,
         },
         {
+          name: "Ahmed",
           msg: "You too have a wonderful day !",
           sender: false,
         },
         {
+          name: "Ahmed",
           msg: "You too have a wonderful day !",
           sender: true,
         },
         {
+          name: "Ahmed",
           msg: "You too have a wonderful day !",
           sender: true,
         },
         {
+          name: "Ahmed",
           msg: "You too have a wonderful day !",
           sender: false,
         },
         {
+          name: "Ahmed",
           msg: "You too have a wonderful day !",
           sender: true,
         },
         {
+          name: "Ahmed",
           msg: "You too have a wonderful day !",
           sender: false,
         },
         {
+          name: "Ahmed",
           msg: "You too have a wonderfun Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta et, non molestias, mollitia quo recusandae quisquam reiciendis alias fuga rerum quos itaque fugiat deserunt nam vero reprehenderit exercitationem minima repudiandae! Natus reprehenderit asperiores tenetur culpa libero omnis aspernatur odio assumenda aliquid quam, tempora possimus? Omnis laboriosam veritatis eligendi sed sunt sit, culpa quisquam eaque, dolores repudiandae repellat recusandae adipisci.lorem day !",
           sender: false,
         },
@@ -143,11 +163,7 @@ export default {
 .receiver {
   background-color: #f0f0f0;
 }
-.msg-container {
-  max-width: 50vw;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+
 .messages {
   height: 88vh;
 }
