@@ -4,7 +4,7 @@
     <router-link :to="{ name: 'signup' }">signup |</router-link>
     <router-link :to="{ name: 'home' }">home |</router-link>
     <router-link :to="{ name: 'chat' }">chat</router-link>
-    <RouterView />
+    <RouterView @termsAccepted="termsAccepted" :termsA="termsAcc" />
   </div>
 </template>
 
@@ -15,7 +15,14 @@ export default {
   data() {
     return {
       background: require("../src/assets/background.jpg"),
+      termsAcc: false,
     };
+  },
+  methods: {
+    termsAccepted() {
+      console.log(this.termsAcc);
+      this.termsAcc = true;
+    },
   },
 };
 document.title = "TuniChat";

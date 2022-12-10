@@ -1,5 +1,6 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap";
 import { createApp } from "vue";
 import Vue3Lottie from "vue3-lottie";
 import App from "./App.vue";

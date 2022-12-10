@@ -19,13 +19,13 @@
             </p>
           </div>
           <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="remember" v-model="rememberMe" required />
+            <input type="checkbox" class="form-check-input" id="remember" v-model="termsAcc" required />
             <label class="form-check-label" for="remember">
               I agree to
-              <router-link @termsAccepted="termsAccepted" :to="{ name: 'terms&conditions' }"> Terms and Conditions </router-link>
+              <router-link :to="{ name: 'terms&conditions' }"> Terms and Conditions </router-link>
             </label>
           </div>
-          <button type="submit" class="btn btn-outline-danger submit-register">Signup</button>
+          <button type="submit" class="btn btn-outline-danger submit-register">SignUp</button>
         </form>
         <div class="container login text-center mt-4">
           <p>
@@ -52,20 +52,27 @@ export default {
     return {
       email: "",
       password: "",
-      termsAcc: false,
+      termsAcc: this.termsA,
       passwordError: "",
-      rememberMe: false,
     };
   },
   methods: {
     handleSubmit() {
-      this.passwordError = this.password.length >= 8 ? "" : "Password must be at least 8 chars long !";
+      this.passwordError = this.passwordErrorMsg;
       console.log(this.email);
       console.log(this.password);
-      console.log(this.rememberMe);
+      console.log(this.termsAcc);
     },
-    termsAccepted() {
-      this.termsAcc = true;
+  },
+  props: {
+    termsA: {
+      type: Boolean,
+    },
+  },
+
+  computed: {
+    passwordErrorMsg() {
+      return this.password.length >= 8 ? "" : "Password must be at least 8 chars long !";
     },
   },
 };

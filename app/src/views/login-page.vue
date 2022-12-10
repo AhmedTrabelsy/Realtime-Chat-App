@@ -51,6 +51,19 @@ export default {
       passwordError: "",
     };
   },
+  methods: {
+    handleSubmit() {
+      this.passwordError = this.passwordErrorMsg;
+      console.log(this.email);
+      console.log(this.password);
+      console.log(this.termsAcc);
+    },
+  },
+  computed: {
+    passwordErrorMsg() {
+      return this.password.length >= 8 ? "" : "Password must be at least 8 chars long !";
+    },
+  },
 };
 </script>
 

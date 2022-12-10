@@ -21,8 +21,8 @@ export default {
   },
   methods: {
     termsAccepted() {
-      this.$router.back();
       this.$emit("termsAccepted");
+      this.$router.back();
     },
   },
 };

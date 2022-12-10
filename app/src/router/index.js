@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import chat from "../views/chat-page.vue";
 import login from "../views/login-page.vue";
-import main from "../views/main-page.vue";
+import main from "../views/home-page.vue";
 import signup from "../views/signup-page.vue";
 import terms from "../views/terms-page.vue";
 
