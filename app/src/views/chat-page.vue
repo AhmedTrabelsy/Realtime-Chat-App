@@ -12,18 +12,18 @@
           }"
           class="d-flex my-2"
         >
-          <div class="bg-dark rounded-circle avatar me-2" v-if="!element.sender"></div>
-          <div class="bg-primary rounded text-light p-2">
-            <span>{{ element.msg }}</span>
-          </div>
-          <div class="bg-dark rounded-circle avatar ms-2" v-if="element.sender"></div>
+          <div class="bg-light rounded-circle avatar me-2" v-if="!element.sender"></div>
+          <p class="bg-primary msg-container rounded text-light p-2">
+            {{ element.msg }}
+          </p>
+          <div class="bg-warning rounded-circle avatar ms-2" v-if="element.sender"></div>
         </div>
         <div class="bottom" ref="bottom"></div>
       </div>
-      <div class="d-flex fixed">
+      <form class="d-flex fixed" @keyup.enter="goToBottom">
         <input type="text" v-model="msgValue" class="card msg-input rounded-0" placeholder="Write here " />
-        <button type="submit" @click="sendMsg" class="sendBtn border btn btn-success rounded-0 px-4"><i class="bi bi-send"></i></button>
-      </div>
+        <button type="submit" @click.prevent="sendMsg" class="sendBtn border btn btn-success rounded-0 px-4"><i class="bi bi-send"></i></button>
+      </form>
     </div>
   </div>
 </template>
@@ -117,7 +117,7 @@ export default {
           sender: false,
         },
         {
-          msg: "You too have a wonderful day !",
+          msg: "You too have a wonderfun Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta et, non molestias, mollitia quo recusandae quisquam reiciendis alias fuga rerum quos itaque fugiat deserunt nam vero reprehenderit exercitationem minima repudiandae! Natus reprehenderit asperiores tenetur culpa libero omnis aspernatur odio assumenda aliquid quam, tempora possimus? Omnis laboriosam veritatis eligendi sed sunt sit, culpa quisquam eaque, dolores repudiandae repellat recusandae adipisci.lorem day !",
           sender: false,
         },
       ],
@@ -140,13 +140,13 @@ export default {
 </script>
 
 <style>
-.messages {
-  height: 90vh;
+.msg-container {
+  max-width: 50vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-
-.bottom {
-  width: 30px;
-  height: 50px;
+.messages {
+  height: 86vh;
 }
 
 .msg-input {
@@ -156,10 +156,6 @@ export default {
 }
 .msg-input:focus {
   outline: none;
-}
-
-.sendBtn {
-  padding: 0 40px;
 }
 
 p,
@@ -193,7 +189,22 @@ a {
 /* Small devices (landscape phones, 576px and up) */
 @media (max-width: 480px) {
   .chat {
-    width: 90vw;
+    width: 100vw;
+    height: 100vh;
+    border: none;
+    border-radius: 0;
+  }
+
+  .msg-container {
+    max-width: 65vw;
+  }
+
+  .messages {
+    height: 95vh;
+  }
+
+  .info {
+    display: none;
   }
 }
 
