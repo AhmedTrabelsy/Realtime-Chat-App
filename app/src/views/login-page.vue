@@ -13,7 +13,7 @@
         <div class="form-group mb-1">
           <label for="password">Password</label>
           <input type="password" class="form-control bg-transparent mt-2" id="password" v-model="password" required />
-          <p v-if="passwordError" class="text-warning password">
+          <p v-if="passwordError" class="text-warning passwordError">
             {{ passwordError }}
           </p>
         </div>
@@ -68,6 +68,9 @@ export default {
 </script>
 
 <style>
+.passwordError {
+  padding: 0;
+}
 /* Small devices (landscape phones, 576px and up) */
 @media (max-width: 480px) {
   .login-logo {
@@ -83,13 +86,13 @@ export default {
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 1100px) {
   .login-logo {
-    width: 10em;
+    width: 12em;
   }
 
   p,
   label,
   a {
-    font-size: large;
+    font-size: small;
   }
 }
 </style>

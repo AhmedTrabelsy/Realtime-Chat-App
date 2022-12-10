@@ -16,9 +16,9 @@
         </div>
         <div class="bottom" ref="bottom"></div>
       </div>
-      <form class="d-flex fixed" @keyup.enter="sendMsg">
+      <form class="d-flex fixed" @keyup.enter="sendMsg" @submit.prevent="sendMsg">
         <input type="text" v-model="msgValue" @focus="goToBottom" class="card msg-input rounded-0 px-4" placeholder=" Type a message" />
-        <button v-if="msgValue" type="submit" @click.prevent="sendMsg" class="sendBtn border btn btn-success rounded-0 px-4"><i class="bi bi-send"></i></button>
+        <button v-if="msgValue" type="submit" class="sendBtn border btn btn-success rounded-0 px-4"><i class="bi bi-send"></i></button>
       </form>
     </div>
   </div>
