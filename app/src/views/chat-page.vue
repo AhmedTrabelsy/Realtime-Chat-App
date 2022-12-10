@@ -21,7 +21,7 @@
         <div class="bottom" ref="bottom"></div>
       </div>
       <form class="d-flex fixed" @keyup.enter="goToBottom">
-        <input type="text" v-model="msgValue" class="card msg-input rounded-0" placeholder="Write here " />
+        <input type="text" v-model="msgValue" @focus="goToBottom" class="card msg-input rounded-0" placeholder="Write here " />
         <button type="submit" @click.prevent="sendMsg" class="sendBtn border btn btn-success rounded-0 px-4"><i class="bi bi-send"></i></button>
       </form>
     </div>
@@ -146,7 +146,7 @@ export default {
   text-overflow: ellipsis;
 }
 .messages {
-  height: 86vh;
+  height: 88vh;
 }
 
 .msg-input {
