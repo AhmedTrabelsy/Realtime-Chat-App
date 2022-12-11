@@ -12,7 +12,7 @@
           }"
           class="d-flex my-2"
         >
-          <messageComponent :name="element.name" :msg="element.msg" :sender="element.sender" />
+          <messageComponent :name="element.full_name" :msg="element.message" :sender="element.sender" />
         </div>
         <div class="bottom" ref="bottom"></div>
       </div>
@@ -26,123 +26,38 @@
 
 <script>
 import messageComponent from "@/components/message-component.vue";
+
+import chatService from "@/services/chatService.js";
+
 export default {
   name: "chatPage",
   components: { messageComponent },
   data() {
     return {
       msgValue: "",
-      msgs: [
-        {
-          name: "Ahmed",
-          msg: "Hello how are you ?",
-          sender: true,
-        },
-        {
-          name: "Ahmed",
-          msg: "Im fine and you ?",
-          sender: false,
-        },
-        {
-          name: "Ahmed",
-          msg: "Im fine as well",
-          sender: true,
-        },
-        {
-          name: "Ahmed",
-          msg: "Thanks for asking !",
-          sender: true,
-        },
-        {
-          name: "Ahmed",
-          msg: "Good to hear that",
-          sender: false,
-        },
-        {
-          name: "Ahmed",
-          msg: "Take care and enjoy your life buddy",
-          sender: true,
-        },
-        {
-          name: "Ahmed",
-          msg: "You too have a wonderful day !",
-          sender: false,
-        },
-        {
-          name: "Ahmed",
-          msg: "You too have a wonderful day !",
-          sender: true,
-        },
-        {
-          name: "Ahmed",
-          msg: "You too have a wonderful day !",
-          sender: false,
-        },
-        {
-          name: "Ahmed",
-          msg: "You too have a wonderful day !",
-          sender: true,
-        },
-        {
-          name: "Ahmed",
-          msg: "You too have a wonderful day !",
-          sender: true,
-        },
-        {
-          name: "Ahmed",
-          msg: "You too have a wonderful day !",
-          sender: true,
-        },
-        {
-          name: "Ahmed",
-          msg: "You too have a wonderful day !",
-          sender: false,
-        },
-        {
-          name: "Ahmed",
-          msg: "You too have a wonderful day !",
-          sender: true,
-        },
-        {
-          name: "Ahmed",
-          msg: "You too have a wonderful day !",
-          sender: false,
-        },
-        {
-          name: "Ahmed",
-          msg: "You too have a wonderful day !",
-          sender: true,
-        },
-        {
-          name: "Ahmed",
-          msg: "You too have a wonderful day !",
-          sender: true,
-        },
-        {
-          name: "Ahmed",
-          msg: "You too have a wonderful day !",
-          sender: false,
-        },
-        {
-          name: "Ahmed",
-          msg: "You too have a wonderful day !",
-          sender: true,
-        },
-        {
-          name: "Ahmed",
-          msg: "You too have a wonderful day !",
-          sender: false,
-        },
-        {
-          name: "Ahmed",
-          msg: "You too have a wonderfun Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta et, non molestias, mollitia quo recusandae quisquam reiciendis alias fuga rerum quos itaque fugiat deserunt nam vero reprehenderit exercitationem minima repudiandae! Natus reprehenderit asperiores tenetur culpa libero omnis aspernatur odio assumenda aliquid quam, tempora possimus? Omnis laboriosam veritatis eligendi sed sunt sit, culpa quisquam eaque, dolores repudiandae repellat recusandae adipisci.lorem day !",
-          sender: false,
-        },
-      ],
+      msgs: null,
+      currentUser: 1,
     };
   },
   mounted() {
     this.goToBottom();
+  },
+  created() {
+    chatService
+      .getMessages()
+      .then((response) => {
+        this.msgs = response.data;
+        this.msgs.forEach((element) => {
+          if (element.sender_id == this.currentUser) {
+            element.sender = true;
+          } else {
+            element.sender = false;
+          }
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
   methods: {
     goToBottom() {
@@ -150,8 +65,9 @@ export default {
     },
     sendMsg() {
       if (this.msgValue.length > 0) {
-        this.msgs.push({ msg: this.msgValue, sender: true });
+        this.msgs.push({ full_name: "test", message: this.msgValue, sender: true, sender_id: this.currentUser });
         this.msgValue = "";
+        console.log(this.msgs);
       }
       this.goToBottom();
     },

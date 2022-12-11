@@ -7,13 +7,10 @@
 <script>
 import login from "@/assets/animations/login.json";
 import signup from "@/assets/animations/signup.json";
-import Vue3Lottie from "vue3-lottie";
-
 export default {
   name: "lottieVue",
   data() {
     return {
-      Vue3Lottie,
       login,
       signup,
     };
