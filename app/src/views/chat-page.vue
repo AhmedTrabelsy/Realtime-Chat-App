@@ -1,6 +1,29 @@
 <template>
   <div class="main-page d-flex">
-    <div class="info glass-container" style="border: 5px solid transparent"></div>
+    <div class="info glass-container pt-4" style="border: 5px solid transparent">
+      <div class="d-flex flex-column px-5">
+        <div class="d-flex">
+          <div class="avatar bg-warning rounded-circle profile-avatar"></div>
+          <div class="name_email ms-2 mt-2">
+            <h6>{{ full_name }}</h6>
+            <p>{{ email }}</p>
+          </div>
+        </div>
+        <div class="search">
+          <input type="search" class="form-control bg-transparent mt-2" v-model="search" placeholder="Search..." />
+        </div>
+        <hr />
+      </div>
+      <div class="contacts px-3 overflow-auto">
+        <div v-for="(element, index) in users" :key="index" class="msg_card mb-3 d-flex rounded p-2">
+          <div class="avatar bg-warning rounded-circle profile-avatar me-3"></div>
+          <div class="d-flex flex-column">
+            <h6>{{ element.full_name }}</h6>
+            <p>Last Message !</p>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="chat glass-container overflow-hidden" style="border: 2px solid transparent">
       <div class="container messages overflow-auto">
         <div
@@ -17,7 +40,7 @@
         <div class="bottom" ref="bottom"></div>
       </div>
       <form class="d-flex fixed" @keyup.enter="sendMsg" @submit.prevent="sendMsg">
-        <input type="text" v-model="msgValue" @focus="goToBottom" class="card msg-input rounded-0 px-4" placeholder=" Type a message" />
+        <input type="text" v-model="msgValue" @focus="goToBottom" class="msg-input rounded-0 px-4" placeholder=" Type a message" />
         <button v-if="msgValue" type="submit" class="sendBtn border btn btn-success rounded-0 px-4"><i class="bi bi-send"></i></button>
       </form>
     </div>
@@ -26,17 +49,21 @@
 
 <script>
 import messageComponent from "@/components/message-component.vue";
-
 import chatService from "@/services/chatService.js";
+import userService from "@/services/userService.js";
 
 export default {
   name: "chatPage",
   components: { messageComponent },
   data() {
     return {
+      full_name: "",
+      email: "",
       msgValue: "",
       msgs: null,
-      currentUser: 1,
+      currentUser: this.$route.params.id,
+      users: null,
+      search: "",
     };
   },
   mounted() {
@@ -50,10 +77,20 @@ export default {
         this.msgs.forEach((element) => {
           if (element.sender_id == this.currentUser) {
             element.sender = true;
+            this.full_name = element.full_name;
+            this.email = element.email;
           } else {
             element.sender = false;
           }
         });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    userService
+      .getUsers(this.currentUser)
+      .then((response) => {
+        this.users = response.data;
       })
       .catch((error) => {
         console.log(error);
@@ -67,7 +104,6 @@ export default {
       if (this.msgValue.length > 0) {
         this.msgs.push({ full_name: "test", message: this.msgValue, sender: true, sender_id: this.currentUser });
         this.msgValue = "";
-        console.log(this.msgs);
       }
       this.goToBottom();
     },
@@ -76,18 +112,27 @@ export default {
 </script>
 
 <style>
+.contacts {
+  max-height: 62vh;
+}
+.msg_card {
+  backdrop-filter: blur(10px);
+}
+
 .receiver {
   background-color: #f0f0f0;
 }
 
 .messages {
-  height: 88vh;
+  height: 85.7vh;
 }
 
 .msg-input {
   height: 50px;
   width: 100%;
   border: none;
+  background-color: white;
+  opacity: 0.6;
 }
 .msg-input:focus {
   outline: none;
@@ -107,7 +152,7 @@ a {
 }
 
 .info {
-  width: 30vw;
+  width: 25vw;
   height: 93vh;
 }
 
@@ -116,9 +161,25 @@ a {
   height: 93vh;
 }
 
-.avatar {
-  width: 42px;
-  height: 42px;
+.profile-avatar {
+  width: 60px;
+  height: 60px;
+}
+
+h6,
+p,
+hr {
+  color: #eee;
+}
+p {
+  opacity: 0.7;
+}
+
+.search * {
+  backdrop-filter: blur(20px);
+  /* background: transparent
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E")
+    no-repeat 13px center; */
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -155,11 +216,15 @@ a {
   .chat {
     width: 40vw;
   }
-
-  p,
-  label,
-  a {
-    font-size: small;
+  .profile-avatar {
+    width: 100px;
+    height: 100px;
+  }
+  .name_email h6 {
+    font-size: xx-large;
+  }
+  .name_email p {
+    font-size: large;
   }
 }
 </style>

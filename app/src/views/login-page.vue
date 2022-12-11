@@ -36,6 +36,7 @@
 <script>
 import lottieVue from "@/components/lottie.vue";
 import registerHeader from "@/components/register-header.vue";
+import userService from "@/services/userService.js";
 
 export default {
   name: "loginPage",
@@ -45,18 +46,30 @@ export default {
   },
   data() {
     return {
+      full_name: "",
       email: "",
       password: "",
       rememberMe: false,
       passwordError: "",
+      authorised: false,
     };
   },
   methods: {
     handleSubmit() {
       this.passwordError = this.passwordErrorMsg;
-      console.log(this.email);
-      console.log(this.password);
-      console.log(this.termsAcc);
+      userService
+        .getUser(this.email, this.password)
+        .then((response) => {
+          this.full_name = response.data.full_name;
+          this.email = response.data.email;
+          this.authorised = response.data.full_name ? true : false;
+          if (this.authorised) {
+            this.$router.push({ name: "chatPage", params: { id: response.data.user_id } });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
   computed: {
@@ -64,6 +77,7 @@ export default {
       return this.password.length >= 8 ? "" : "Password must be at least 8 chars long !";
     },
   },
+  created() {},
 };
 </script>
 

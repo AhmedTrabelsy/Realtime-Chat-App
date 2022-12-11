@@ -1,10 +1,10 @@
 <template>
-  <div class="bg-light rounded-circle avatar me-2" v-if="!sender"></div>
+  <div class="bg-light rounded-circle msg-avatar me-2" v-if="!sender"></div>
   <p :class="{ 'receiver text-dark': !sender, 'bg-primary': sender }" class="msg-container position-relative rounded text-light p-2">
     <span class="name position-absolute badge" v-if="!sender">{{ name }}</span>
     {{ msg }}
   </p>
-  <div class="bg-warning rounded-circle avatar ms-2" v-if="sender"></div>
+  <div class="bg-warning rounded-circle msg-avatar ms-2" v-if="sender"></div>
 </template>
 
 <script>
@@ -34,5 +34,9 @@ export default {
 .msg-container .name {
   top: -16px;
   left: -5px;
+}
+.msg-avatar {
+  width: 42px;
+  height: 42px;
 }
 </style>

@@ -3,7 +3,6 @@
     <router-link :to="{ name: 'login' }">Login |</router-link>
     <router-link :to="{ name: 'signup' }">signup |</router-link>
     <router-link :to="{ name: 'home' }">home |</router-link>
-    <router-link :to="{ name: 'chat' }">chat</router-link>
     <RouterView @termsAccepted="termsAccepted" :termsA="termsAcc" />
   </div>
 </template>
@@ -20,7 +19,6 @@ export default {
   },
   methods: {
     termsAccepted() {
-      console.log(this.termsAcc);
       this.termsAcc = true;
     },
   },

@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-center">
+  <div class="d-flex sign_up justify-content-center">
     <div class="glass-container centred-container">
       <div class="signup-logo container">
         <lottieVue animation="signup" />
@@ -84,10 +84,6 @@ export default {
 </script>
 
 <style>
-input {
-  background: transparent;
-}
-
 h1,
 label,
 p {

@@ -27,8 +27,8 @@ const routes = [
     component: terms,
   },
   {
-    path: "/chat",
-    name: "chat",
+    path: "/chat/:id",
+    name: "chatPage",
     component: chat,
   },
 ];
