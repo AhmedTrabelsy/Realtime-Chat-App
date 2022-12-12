@@ -40,7 +40,16 @@
         <div class="bottom" ref="bottom"></div>
       </div>
       <form class="d-flex fixed" @keyup.enter="sendMessage" @submit.prevent="sendMessage">
-        <input type="text" v-model="msgValue" @focus="goToBottom" class="msg-input rounded-0 px-4" placeholder=" Type a message" />
+        <input
+          type="text"
+          v-model="msgValue"
+          @focus="
+            goToBottom();
+            getMessages();
+          "
+          class="msg-input rounded-0 px-4"
+          placeholder=" Type a message"
+        />
         <button v-if="msgValue" type="submit" class="sendBtn border btn btn-success rounded-0 px-4"><i class="bi bi-send"></i></button>
       </form>
     </div>
@@ -68,22 +77,11 @@ export default {
     };
   },
   mounted() {
-    this.goToBottom();
-  },
-  created() {
-    this.getMessages(),
-      userService
-        .getUsers(this.currentUser)
-        .then((response) => {
-          this.users = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    this.getUsers();
+    this.getMessages();
   },
   methods: {
     goToBottom() {
-      this.getMessages();
       this.$refs["bottom"].scrollIntoView({ behavior: "smooth" });
     },
     sendMessage() {
@@ -97,11 +95,23 @@ export default {
       }
       this.goToBottom();
     },
+    getUsers() {
+      userService
+        .getUsers(this.currentUser)
+        .then((response) => {
+          this.users = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     getMessages() {
       chatService
         .getMessages()
         .then((response) => {
+          console.log(this.msgs);
           this.msgs = response.data;
+          console.log(this.msgs);
           this.msgs.forEach((element) => {
             if (element.sender_id == this.currentUser) {
               element.sender = true;
@@ -133,7 +143,8 @@ export default {
 }
 
 .messages {
-  height: 85.7vh;
+  height: 80.7vh;
+  padding-top: 20px;
 }
 
 .msg-input {
@@ -205,7 +216,7 @@ p {
   }
 
   .messages {
-    height: 95vh;
+    height: 93.4vh;
   }
 
   .info {
@@ -217,6 +228,9 @@ p {
 @media (min-width: 481px) {
   .chat {
     width: 70vw;
+  }
+  .messages {
+    height: 85.6vh;
   }
 }
 
