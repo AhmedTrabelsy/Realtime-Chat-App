@@ -2,7 +2,7 @@
   <div class="main-page d-flex">
     <div class="info glass-container pt-4" style="border: 5px solid transparent">
       <div class="d-flex flex-column px-5">
-        <div class="d-flex">
+        <div class="d-flex user-info" @click="accountPopUp">
           <div class="avatar bg-warning rounded-circle profile-avatar"></div>
           <div class="name_email ms-2 mt-2">
             <h6>{{ full_name }}</h6>
@@ -10,7 +10,7 @@
           </div>
         </div>
         <div class="search">
-          <input type="search" class="form-control bg-transparent mt-2" v-model="search" placeholder="Search..." />
+          <input type="search" class="form-control bg-transparent mt-2" @input="getUsers" v-model="search" placeholder="Search..." />
         </div>
         <hr />
       </div>
@@ -111,7 +111,7 @@ export default {
     },
     sendMessage() {
       if (this.msgValue.length > 0) {
-        this.msgs.push({ full_name: "test", message: this.msgValue, sender: true, sender_id: this.currentUser });
+        this.msgs.push({ full_name: this.full_name, message: this.msgValue, sender: true, sender_id: this.currentUser });
         //push msg to database
         chatService.sendMsg(this.currentUser, this.currentReceiver, this.msgValue).then(() => {
           // console.log(response);
@@ -123,9 +123,11 @@ export default {
     },
     getUsers() {
       userService
-        .getUsers(this.currentUser)
+        .getUsers(this.currentUser, this.search)
         .then((response) => {
-          this.users = response.data;
+          this.users = response.data[0];
+          this.full_name = response.data[1].full_name;
+          this.email = response.data[1].email;
         })
         .catch((error) => {
           console.log(error);
@@ -146,8 +148,6 @@ export default {
       this.msgs.forEach((element, index) => {
         if (element.sender_id == this.currentUser) {
           element.sender = true;
-          this.full_name = element.full_name;
-          this.email = element.email;
         } else {
           element.sender = false;
         }
@@ -163,11 +163,67 @@ export default {
         }
       });
     },
+    updateInfo(name, email, password) {
+      if (password.length < 8) {
+        password = "";
+      }
+      this.full_name = name ? name : this.full_name;
+      this.email = email ? email : this.email;
+      userService
+        .updateUser(this.currentUser, name, email, password)
+        .then((response) => {
+          if (response.data) {
+            console.log("success");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      this.Toast.fire({ icon: "success", title: "Info Updated!" });
+    },
+    async accountPopUp() {
+      const { value: formValues } = await this.$swal.fire({
+        icon: "info",
+        title: "Edit",
+        html:
+          `<input id="name" class="swal2-input" placeholder="Full Name" value="${this.full_name}">` +
+          `<input type="email" id="email" class="swal2-input" placeholder="Email" value="${this.email}">` +
+          `<input type="password" id="password" class="swal2-input" placeholder="New Password"">`,
+        focusConfirm: false,
+        preConfirm: () => {
+          return [document.getElementById("name").value, document.getElementById("email").value, document.getElementById("password").value];
+        },
+      });
+
+      if (formValues) {
+        //update
+        this.updateInfo(formValues[0], formValues[1], formValues[2]);
+      }
+    },
+  },
+  computed: {
+    Toast() {
+      return this.$swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", this.$swal.stopTimer);
+          toast.addEventListener("mouseleave", this.$swal.resumeTimer);
+        },
+      });
+    },
   },
 };
 </script>
 
 <style>
+.user-info:hover {
+  backdrop-filter: blur(1px);
+  border-radius: 10px;
+}
 .contacts {
   max-height: 62vh;
 }

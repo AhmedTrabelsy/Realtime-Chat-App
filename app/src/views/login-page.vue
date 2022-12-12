@@ -57,24 +57,40 @@ export default {
   methods: {
     handleSubmit() {
       this.passwordError = this.passwordErrorMsg;
-      userService
-        .getUser(this.email, this.password)
-        .then((response) => {
-          this.authorised = response.data.session;
-          if (this.authorised) {
-            this.full_name = response.data.user.full_name;
-            this.email = response.data.user.email;
-            this.$router.push({ name: "chatPage", params: { id: response.data.user.user_id } });
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (this.passwordError == "") {
+        userService
+          .getUser(this.email, this.password)
+          .then((response) => {
+            this.authorised = response.data.session;
+            if (this.authorised) {
+              this.full_name = response.data.user.full_name;
+              this.email = response.data.user.email;
+              this.$router.push({ name: "chatPage", params: { id: response.data.user.user_id } });
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        this.Toast.fire({ icon: "success", title: "Login Successfully!" });
+      }
     },
   },
   computed: {
     passwordErrorMsg() {
       return this.password.length >= 8 ? "" : "Password must be at least 8 chars long !";
+    },
+    Toast() {
+      return this.$swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", this.$swal.stopTimer);
+          toast.addEventListener("mouseleave", this.$swal.resumeTimer);
+        },
+      });
     },
   },
   created() {},

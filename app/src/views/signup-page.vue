@@ -68,20 +68,22 @@ export default {
       // console.log(this.email);
       // console.log(this.password);
       // console.log(this.termsAcc);
-
-      userService
-        .addUser(this.name, this.email, this.password)
-        .then((response) => {
-          this.success = response.data;
-          if (this.success) {
-            this.$router.push({ name: "login" });
-          } else {
-            this.passwordError = "User already exist try to login";
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (this.passwordError == "") {
+        userService
+          .addUser(this.name, this.email, this.password)
+          .then((response) => {
+            this.success = response.data;
+            if (this.success) {
+              this.$router.push({ name: "login" });
+            } else {
+              this.passwordError = "User already exist try to login";
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        this.Toast.fire({ icon: "success", title: "Account Created !" });
+      }
     },
   },
   props: {
@@ -93,6 +95,19 @@ export default {
   computed: {
     passwordErrorMsg() {
       return this.password.length >= 8 ? "" : "Password must be at least 8 chars long !";
+    },
+    Toast() {
+      return this.$swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", this.$swal.stopTimer);
+          toast.addEventListener("mouseleave", this.$swal.resumeTimer);
+        },
+      });
     },
   },
 };
