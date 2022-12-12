@@ -45,6 +45,7 @@
 <script>
 import lottieVue from "@/components/lottie.vue";
 import registerHeader from "@/components/register-header.vue";
+import userService from "@/services/userService.js";
 
 export default {
   name: "signupPage",
@@ -64,9 +65,23 @@ export default {
   methods: {
     handleSubmit() {
       this.passwordError = this.passwordErrorMsg;
-      console.log(this.email);
-      console.log(this.password);
-      console.log(this.termsAcc);
+      // console.log(this.email);
+      // console.log(this.password);
+      // console.log(this.termsAcc);
+
+      userService
+        .addUser(this.name, this.email, this.password)
+        .then((response) => {
+          this.success = response.data;
+          if (this.success) {
+            this.$router.push({ name: "login" });
+          } else {
+            this.passwordError = "User already exist try to login";
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
   props: {

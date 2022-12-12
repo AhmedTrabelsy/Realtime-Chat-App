@@ -60,11 +60,11 @@ export default {
       userService
         .getUser(this.email, this.password)
         .then((response) => {
-          this.full_name = response.data.full_name;
-          this.email = response.data.email;
-          this.authorised = response.data.full_name ? true : false;
+          this.authorised = response.data.session;
           if (this.authorised) {
-            this.$router.push({ name: "chatPage", params: { id: response.data.user_id } });
+            this.full_name = response.data.user.full_name;
+            this.email = response.data.user.email;
+            this.$router.push({ name: "chatPage", params: { id: response.data.user.user_id } });
           }
         })
         .catch((error) => {

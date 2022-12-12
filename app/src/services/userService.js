@@ -20,6 +20,17 @@ export default {
   getUsers(currentUser) {
     return apiClient.post("users.php", currentUser);
   },
+  addUser(name, email, password) {
+    let data = {
+      name: name,
+      email: email,
+      password: password,
+    };
+    return apiClient.post("signup.php", data);
+  },
+  verifySession() {
+    return apiClient.post("verifySession.php");
+  },
   // addChat(event) {
   //   return apiClient.post("addEvent.php", event);
   // },

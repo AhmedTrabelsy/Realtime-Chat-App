@@ -74,12 +74,36 @@ export default {
       currentUser: this.$route.params.id,
       currentReceiver: 1,
       users: null,
+      session: false,
       search: "",
     };
   },
+  beforeCreate: function () {
+    // if (!this.$session.exists()) {
+    //   this.$router.push("-1");
+    // }
+  },
+  // methods: {
+  //   logout: function () {
+  //     this.$session.destroy()
+  //     this.$router.push('/')
+  //   }
+  // },
   mounted() {
     this.getUsers();
     this.getMessages();
+    // userService
+    //   .verifySession()
+    //   .then((response) => {
+    //     this.session = response.data;
+    //     console.log(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    // if (this.session == false) {
+    //   this.$router.push({ name: "login" });
+    // }
   },
   methods: {
     goToBottom() {
