@@ -25,17 +25,18 @@
       </div>
     </div>
     <div class="chat glass-container overflow-hidden" style="border: 2px solid transparent">
-      <div class="container messages overflow-auto">
+      <div class="container messages overflow-auto pb-3">
         <div
           v-for="(element, index) in msgs"
           :key="index"
           :class="{
             'justify-content-end': element.sender,
             'justify-content-start': !element.sender,
+            'mt-4': element.lineBreak,
           }"
-          class="d-flex my-2"
+          class="d-flex"
         >
-          <messageComponent :name="element.full_name" :msg="element.message" :sender="element.sender" />
+          <messageComponent :name="element.full_name" :msg="element.message" :sender="element.sender" :lineBreak="element.lineBreak" />
         </div>
         <div class="bottom" ref="bottom"></div>
       </div>
@@ -93,6 +94,7 @@ export default {
         });
         this.msgValue = "";
       }
+      this.filterMessages();
       this.goToBottom();
     },
     getUsers() {
@@ -110,19 +112,32 @@ export default {
         .getMessages()
         .then((response) => {
           this.msgs = response.data;
-          this.msgs.forEach((element) => {
-            if (element.sender_id == this.currentUser) {
-              element.sender = true;
-              this.full_name = element.full_name;
-              this.email = element.email;
-            } else {
-              element.sender = false;
-            }
-          });
+          this.filterMessages();
         })
         .catch((error) => {
           console.log(error);
         });
+    },
+    filterMessages() {
+      this.msgs.forEach((element, index) => {
+        if (element.sender_id == this.currentUser) {
+          element.sender = true;
+          this.full_name = element.full_name;
+          this.email = element.email;
+        } else {
+          element.sender = false;
+        }
+        if (index == 0) {
+          element.lineBreak = true;
+        }
+        if (this.msgs[index + 1] != undefined) {
+          if (element.sender_id != this.msgs[index + 1].sender_id) {
+            this.msgs[index + 1].lineBreak = true;
+          } else {
+            this.msgs[index + 1].lineBreak = false;
+          }
+        }
+      });
     },
   },
 };
@@ -142,7 +157,6 @@ export default {
 
 .messages {
   height: 80.7vh;
-  padding-top: 20px;
 }
 
 .msg-input {

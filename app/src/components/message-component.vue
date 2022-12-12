@@ -1,10 +1,12 @@
 <template>
-  <div class="bg-light rounded-circle msg-avatar me-2" v-if="!sender"></div>
-  <p :class="{ 'receiver text-dark': !sender, 'bg-primary': sender }" class="msg-container position-relative rounded text-light p-2">
-    <span class="name position-absolute badge" v-if="!sender">{{ name }}</span>
+  <div class="bg-light rounded-circle msg-avatar me-2" v-if="!sender && lineBreak"><div v-if="lineBreak"></div></div>
+  <div v-else class="msg-avatar me-2"></div>
+  <p style="margin: 0" :class="{ 'receiver text-dark': !sender, 'bg-primary': sender }" class="msg-container position-relative rounded text-light p-2 mt-1">
+    <span class="name position-absolute badge" v-if="!sender && lineBreak">{{ name }}</span>
     {{ msg }}
   </p>
-  <div class="bg-warning rounded-circle msg-avatar ms-2" v-if="sender"></div>
+  <div class="bg-warning rounded-circle msg-avatar ms-2" v-if="sender && lineBreak"></div>
+  <div v-else class="msg-avatar me-2"></div>
 </template>
 
 <script>
@@ -20,6 +22,10 @@ export default {
       required: true,
     },
     sender: {
+      type: Boolean,
+      required: true,
+    },
+    lineBreak: {
       type: Boolean,
       required: true,
     },
