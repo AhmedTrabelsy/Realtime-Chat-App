@@ -1,8 +1,5 @@
 <template>
   <div id="app" :style="{ backgroundImage: 'url(' + background + ')' }">
-    <router-link :to="{ name: 'login' }">Login |</router-link>
-    <router-link :to="{ name: 'signup' }">signup |</router-link>
-    <router-link :to="{ name: 'home' }">home |</router-link>
     <RouterView @termsAccepted="termsAccepted" :termsA="termsAcc" />
   </div>
 </template>
@@ -27,6 +24,9 @@ document.title = "TuniChat";
 </script>
 
 <style>
+.bluryButton {
+  backdrop-filter: blur(10px);
+}
 html,
 body {
   max-height: 100vh;
