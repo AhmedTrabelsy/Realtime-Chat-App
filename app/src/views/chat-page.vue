@@ -44,8 +44,8 @@
           type="text"
           v-model="msgValue"
           @focus="
-            goToBottom();
             getMessages();
+            goToBottom();
           "
           class="msg-input rounded-0 px-4"
           placeholder=" Type a message"
@@ -88,8 +88,8 @@ export default {
       if (this.msgValue.length > 0) {
         this.msgs.push({ full_name: "test", message: this.msgValue, sender: true, sender_id: this.currentUser });
         //push msg to database
-        chatService.sendMsg(this.currentUser, this.currentReceiver, this.msgValue).then((response) => {
-          console.log(response);
+        chatService.sendMsg(this.currentUser, this.currentReceiver, this.msgValue).then(() => {
+          // console.log(response);
         });
         this.msgValue = "";
       }
@@ -109,9 +109,7 @@ export default {
       chatService
         .getMessages()
         .then((response) => {
-          console.log(this.msgs);
           this.msgs = response.data;
-          console.log(this.msgs);
           this.msgs.forEach((element) => {
             if (element.sender_id == this.currentUser) {
               element.sender = true;
