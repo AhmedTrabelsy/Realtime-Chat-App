@@ -39,7 +39,7 @@
         </div>
         <div class="bottom" ref="bottom"></div>
       </div>
-      <form class="d-flex fixed" @keyup.enter="sendMsg" @submit.prevent="sendMsg">
+      <form class="d-flex fixed" @keyup.enter="sendMessage" @submit.prevent="sendMessage">
         <input type="text" v-model="msgValue" @focus="goToBottom" class="msg-input rounded-0 px-4" placeholder=" Type a message" />
         <button v-if="msgValue" type="submit" class="sendBtn border btn btn-success rounded-0 px-4"><i class="bi bi-send"></i></button>
       </form>
@@ -62,6 +62,7 @@ export default {
       msgValue: "",
       msgs: null,
       currentUser: this.$route.params.id,
+      currentReceiver: 1,
       users: null,
       search: "",
     };
@@ -70,42 +71,50 @@ export default {
     this.goToBottom();
   },
   created() {
-    chatService
-      .getMessages()
-      .then((response) => {
-        this.msgs = response.data;
-        this.msgs.forEach((element) => {
-          if (element.sender_id == this.currentUser) {
-            element.sender = true;
-            this.full_name = element.full_name;
-            this.email = element.email;
-          } else {
-            element.sender = false;
-          }
+    this.getMessages(),
+      userService
+        .getUsers(this.currentUser)
+        .then((response) => {
+          this.users = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    userService
-      .getUsers(this.currentUser)
-      .then((response) => {
-        this.users = response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   },
   methods: {
     goToBottom() {
+      this.getMessages();
       this.$refs["bottom"].scrollIntoView({ behavior: "smooth" });
     },
-    sendMsg() {
+    sendMessage() {
       if (this.msgValue.length > 0) {
         this.msgs.push({ full_name: "test", message: this.msgValue, sender: true, sender_id: this.currentUser });
+        //push msg to database
+        chatService.sendMsg(this.currentUser, this.currentReceiver, this.msgValue).then((response) => {
+          console.log(response);
+        });
         this.msgValue = "";
       }
       this.goToBottom();
+    },
+    getMessages() {
+      chatService
+        .getMessages()
+        .then((response) => {
+          this.msgs = response.data;
+          this.msgs.forEach((element) => {
+            if (element.sender_id == this.currentUser) {
+              element.sender = true;
+              this.full_name = element.full_name;
+              this.email = element.email;
+            } else {
+              element.sender = false;
+            }
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };

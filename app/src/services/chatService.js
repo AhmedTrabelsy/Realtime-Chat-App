@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://localhost/BackEnd/",
+  baseURL: "http://localhost/Api/",
   withCredentials: false,
   headers: {
     Accept: "application/json",
@@ -11,7 +11,15 @@ const apiClient = axios.create({
 
 export default {
   getMessages() {
-    return apiClient.get("/messages.php");
+    return apiClient.get("/getMessages.php");
+  },
+  sendMsg(currentUser, currentReceiver, msgValue) {
+    let data = {
+      currentUser: currentUser,
+      currentReceiver: currentReceiver,
+      msgValue: msgValue,
+    };
+    return apiClient.post("sendMessage.php", data);
   },
   // getUser(id) {
   //   return apiClient.get("event.php?id=" + id);
