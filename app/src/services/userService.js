@@ -17,6 +17,9 @@ export default {
     };
     return apiClient.post("login.php", data);
   },
+  deleteUser(currentUser) {
+    return apiClient.post("deleteUser.php", currentUser);
+  },
   getUsers(currentUser, search) {
     let data = {
       currentUser: currentUser,

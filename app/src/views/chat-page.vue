@@ -2,10 +2,10 @@
   <div class="main-page d-flex">
     <div class="info glass-container pt-4" style="border: 5px solid transparent">
       <div class="d-flex flex-column px-5">
-        <div class="d-flex user-info" @click="accountPopUp">
-          <div class="avatar bg-warning rounded-circle profile-avatar"></div>
+        <div class="d-flex user-info">
+          <div class="avatar bg-warning rounded-circle profile-avatar" @click="accountPopUp"></div>
           <div class="name_email ms-2 mt-2">
-            <h6>{{ full_name }}</h6>
+            <h6>{{ full_name }} <i class="bi bi-trash deleteIcon" @click="confirm"></i> <i class="bi bi-box-arrow-right logoutIcon" @click="logout"></i></h6>
             <p>{{ email }}</p>
           </div>
         </div>
@@ -60,7 +60,7 @@
 <script>
 import messageComponent from "@/components/message-component.vue";
 import chatService from "@/services/chatService.js";
-import userService from "@/services/userService.js";
+import userService from "@/services/quoteService.js";
 
 export default {
   name: "chatPage",
@@ -106,6 +106,17 @@ export default {
     // }
   },
   methods: {
+    deleteUser() {
+      userService
+        .deleteUser(this.currentUser)
+        .then((response) => {
+          console.log(response.data);
+          this.$router.push({ name: "home" });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     goToBottom() {
       this.$refs["bottom"].scrollIntoView({ behavior: "smooth" });
     },
@@ -200,6 +211,27 @@ export default {
         this.updateInfo(formValues[0], formValues[1], formValues[2]);
       }
     },
+    confirm() {
+      this.$swal
+        .fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!",
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            this.$swal.fire("Deleted!", "Your account has been deleted.", "success");
+            this.deleteUser();
+          }
+        });
+    },
+    logout() {
+      this.$router.push({ name: "home" });
+    },
   },
   computed: {
     Toast() {
@@ -220,6 +252,24 @@ export default {
 </script>
 
 <style>
+.deleteIcon {
+  color: red;
+}
+.deleteIcon:hover {
+  background-color: red;
+  color: white;
+  border-radius: 5px;
+  padding: 2px;
+}
+.logoutIcon {
+  color: rgb(255, 208, 0);
+}
+.logoutIcon:hover {
+  background-color: rgb(255, 208, 0);
+  color: white;
+  border-radius: 5px;
+  padding: 2px;
+}
 .user-info:hover {
   backdrop-filter: blur(1px);
   border-radius: 10px;

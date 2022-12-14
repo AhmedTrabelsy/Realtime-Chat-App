@@ -45,7 +45,7 @@
 <script>
 import lottieVue from "@/components/lottie.vue";
 import registerHeader from "@/components/register-header.vue";
-import userService from "@/services/userService.js";
+import userService from "@/services/quoteService.js";
 
 export default {
   name: "signupPage",

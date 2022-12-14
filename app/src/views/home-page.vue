@@ -7,7 +7,7 @@
         <h1 class="display-5">Join us now !</h1>
         <hr />
         <p class="display-6 fs-5">Connect with friends and the world around you on <strong>TuniChat</strong>.</p>
-        <div class="btn-group d-flex justify-content-center bluryButton">
+        <div class="buttons btn-group d-flex justify-content-center bluryButton">
           <router-link :to="{ name: 'login' }" class="btn btn-outline-light">Login</router-link>
           <router-link :to="{ name: 'signup' }" class="btn btn-outline-light">SignUp</router-link>
         </div>
@@ -44,5 +44,8 @@ export default {
 }
 .register strong {
   color: #6d0073;
+}
+.buttons {
+  margin-top: 23vh;
 }
 </style>
