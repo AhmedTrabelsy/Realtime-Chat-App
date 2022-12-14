@@ -1,7 +1,12 @@
 <template>
   <div class="bg-light rounded-circle msg-avatar me-2" v-if="!sender && lineBreak"><div v-if="lineBreak"></div></div>
   <div v-else class="msg-avatar me-2"></div>
-  <p style="margin: 0" :class="{ 'receiver text-dark': !sender, 'bg-primary': sender }" class="msg-container position-relative rounded text-light p-2 mt-1">
+  <p
+    @click="$emit('delete', this.message_id)"
+    style="margin: 0"
+    :class="{ 'receiver text-dark': !sender, 'bg-primary': sender }"
+    class="msg-container position-relative rounded text-light p-2 mt-1"
+  >
     <span class="name position-absolute badge" v-if="!sender && lineBreak">{{ name }}</span>
     {{ msg }}
   </p>
