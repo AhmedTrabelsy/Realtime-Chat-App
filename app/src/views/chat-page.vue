@@ -3,7 +3,7 @@
     <div class="info glass-container pt-4" style="border: 5px solid transparent">
       <div class="d-flex flex-column px-5">
         <div class="d-flex user-info">
-          <div class="avatar bg-warning rounded-circle profile-avatar" @click="accountPopUp"></div>
+          <img class="avatar bg-warning rounded-circle profile-avatar" @click="accountPopUp" :src="avatar" alt="avatar" />
           <div class="name_email ms-2 mt-2">
             <h6>{{ full_name }} <i class="bi bi-trash deleteIcon" @click="confirm"></i> <i class="bi bi-box-arrow-right logoutIcon" @click="logout"></i></h6>
             <p>{{ email }}</p>
@@ -24,7 +24,8 @@
           "
           class="msg_card mb-3 d-flex rounded p-2"
         >
-          <div class="avatar bg-warning rounded-circle profile-avatar me-3"></div>
+          <img class="avatar bg-warning rounded-circle profile-avatar me-3" @click="accountPopUp" :src="avatar" alt="avatar" />
+
           <div class="d-flex flex-column">
             <h6>{{ element.full_name }}</h6>
             <p>Last Message !</p>
@@ -48,7 +49,7 @@
           }"
           class="d-flex"
         >
-          <messageComponent :name="element.full_name" :msg="element.message" :sender="element.sender" :lineBreak="element.lineBreak" />
+          <messageComponent :name="element.full_name" :msg="element.message" :sender="element.sender" :lineBreak="element.lineBreak" :avatar="this.avatar" />
         </div>
         <div class="bottom" ref="bottom"></div>
       </div>
@@ -262,6 +263,9 @@ export default {
           toast.addEventListener("mouseleave", this.$swal.resumeTimer);
         },
       });
+    },
+    avatar() {
+      return require("../assets/avatar.png");
     },
   },
 };

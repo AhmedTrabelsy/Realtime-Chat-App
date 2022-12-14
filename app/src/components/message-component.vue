@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-light rounded-circle msg-avatar me-2" v-if="!sender && lineBreak"><div v-if="lineBreak"></div></div>
+  <img class="bg-light rounded-circle msg-avatar me-2" v-if="!sender && lineBreak" :src="avatar" alt="avatar" />
   <div v-else class="msg-avatar me-2"></div>
   <p
     @click="$emit('delete', this.message_id)"
@@ -10,7 +10,7 @@
     <span class="name position-absolute badge" v-if="!sender && lineBreak">{{ name }}</span>
     {{ msg }}
   </p>
-  <div class="bg-warning rounded-circle msg-avatar ms-2" v-if="sender && lineBreak"></div>
+  <img :src="avatar" alt="avatar" class="bg-warning rounded-circle msg-avatar ms-2" v-if="sender && lineBreak" />
   <div v-else class="msg-avatar me-2"></div>
 </template>
 
@@ -32,6 +32,10 @@ export default {
     },
     lineBreak: {
       type: Boolean,
+      required: true,
+    },
+    avatar: {
+      type: String,
       required: true,
     },
   },
