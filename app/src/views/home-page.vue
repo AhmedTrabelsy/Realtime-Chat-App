@@ -99,4 +99,9 @@ export default {
     width: 16rem;
   }
 }
+@media (min-width: 1001px) {
+  .register {
+    max-width: 50vw;
+  }
+}
 </style>

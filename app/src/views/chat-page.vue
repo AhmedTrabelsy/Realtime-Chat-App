@@ -15,7 +15,15 @@
         <hr />
       </div>
       <div class="contacts px-3 overflow-auto">
-        <div v-for="(element, index) in users" :key="index" class="msg_card mb-3 d-flex rounded p-2">
+        <div
+          v-for="(element, index) in users"
+          :key="index"
+          @click="
+            switchConversation(element.user_id);
+            getMessages();
+          "
+          class="msg_card mb-3 d-flex rounded p-2"
+        >
           <div class="avatar bg-warning rounded-circle profile-avatar me-3"></div>
           <div class="d-flex flex-column">
             <h6>{{ element.full_name }}</h6>
@@ -26,6 +34,10 @@
     </div>
     <div class="chat glass-container overflow-hidden" style="border: 2px solid transparent">
       <div class="container messages overflow-auto pb-3">
+        <!-- <div class="bg-light ">Test</div> -->
+        <div v-if="this.msgs == null || this.msgs.length == 0" class="container empty">
+          <lottieVue animation="empty" />
+        </div>
         <div
           v-for="(element, index) in msgs"
           :key="index"
@@ -58,13 +70,14 @@
 </template>
 
 <script>
+import lottieVue from "@/components/lottie.vue";
 import messageComponent from "@/components/message-component.vue";
 import chatService from "@/services/chatService.js";
-import userService from "@/services/quoteService.js";
+import userService from "@/services/userService.js";
 
 export default {
   name: "chatPage",
-  components: { messageComponent },
+  components: { messageComponent, lottieVue },
   data() {
     return {
       full_name: "",
@@ -72,7 +85,7 @@ export default {
       msgValue: "",
       msgs: null,
       currentUser: this.$route.params.id,
-      currentReceiver: 1,
+      currentReceiver: null,
       users: null,
       session: false,
       search: "",
@@ -109,13 +122,16 @@ export default {
     deleteUser() {
       userService
         .deleteUser(this.currentUser)
-        .then((response) => {
-          console.log(response.data);
+        .then(() => {
+          // console.log(response.data);
           this.$router.push({ name: "home" });
         })
         .catch((error) => {
           console.log(error);
         });
+    },
+    switchConversation(user_id) {
+      this.currentReceiver = user_id;
     },
     goToBottom() {
       this.$refs["bottom"].scrollIntoView({ behavior: "smooth" });
@@ -146,7 +162,7 @@ export default {
     },
     getMessages() {
       chatService
-        .getMessages()
+        .getMessages(this.currentReceiver, this.currentUser)
         .then((response) => {
           this.msgs = response.data;
           this.filterMessages();
@@ -252,6 +268,10 @@ export default {
 </script>
 
 <style>
+.empty {
+  width: 40vh;
+  margin-top: 20vh;
+}
 .deleteIcon {
   color: red;
 }
@@ -279,6 +299,9 @@ export default {
 }
 .msg_card {
   backdrop-filter: blur(10px);
+}
+.msg_card:hover {
+  background: rgba(255, 255, 255, 0.279);
 }
 
 .receiver {

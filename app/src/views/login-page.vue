@@ -65,12 +65,14 @@ export default {
               this.full_name = response.data.user.full_name;
               this.email = response.data.user.email;
               this.$router.push({ name: "chatPage", params: { id: response.data.user.user_id } });
+              this.Toast.fire({ icon: "success", title: "Login Successfully!" });
+            } else {
+              this.Toast.fire({ icon: "error", title: "Please Verify Your Informations" });
             }
           })
           .catch((error) => {
             console.log(error);
           });
-        this.Toast.fire({ icon: "success", title: "Login Successfully!" });
       }
     },
   },

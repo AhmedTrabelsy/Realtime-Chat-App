@@ -45,7 +45,7 @@
 <script>
 import lottieVue from "@/components/lottie.vue";
 import registerHeader from "@/components/register-header.vue";
-import userService from "@/services/quoteService.js";
+import userService from "@/services/userService.js";
 
 export default {
   name: "signupPage",
@@ -74,6 +74,7 @@ export default {
           .then((response) => {
             this.success = response.data;
             if (this.success) {
+              this.Toast.fire({ icon: "success", title: "Account Created !" });
               this.$router.push({ name: "login" });
             } else {
               this.passwordError = "User already exist try to login";
@@ -82,7 +83,6 @@ export default {
           .catch((error) => {
             console.log(error);
           });
-        this.Toast.fire({ icon: "success", title: "Account Created !" });
       }
     },
   },

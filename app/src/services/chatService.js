@@ -10,8 +10,12 @@ const apiClient = axios.create({
 });
 
 export default {
-  getMessages() {
-    return apiClient.get("/getMessages.php");
+  getMessages(receiver, sender) {
+    let data = {
+      receiver: receiver,
+      sender: sender,
+    };
+    return apiClient.post("/getMessages.php", data);
   },
   sendMsg(currentUser, currentReceiver, msgValue) {
     let data = {
