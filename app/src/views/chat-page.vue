@@ -24,8 +24,7 @@
           "
           class="msg_card mb-3 d-flex rounded p-2"
         >
-          <img class="avatar bg-warning rounded-circle profile-avatar me-3" @click="accountPopUp" :src="avatar" alt="avatar" />
-
+          <img class="avatar bg-warning rounded-circle profile-avatar me-3" :src="avatar" alt="avatar" />
           <div class="d-flex flex-column">
             <h6>{{ element.full_name }}</h6>
             <p>Last Message !</p>
@@ -34,8 +33,13 @@
       </div>
     </div>
     <div class="chat glass-container overflow-hidden" style="border: 2px solid transparent">
+      <div class="msg-header d-flex fixed rounded-0 px-4">
+        <div class="d-flex align-items-center" v-if="currentReceiverName">
+          <img class="avatar converstaionAvatar bg-warning rounded-circle me-3" :src="avatar" alt="avatar" />
+          <h5 class="mt-2">{{ currentReceiverName }}</h5>
+        </div>
+      </div>
       <div class="container messages overflow-auto pb-3">
-        <!-- <div class="bg-light ">Test</div> -->
         <div v-if="this.msgs == null || this.msgs.length == 0" class="container empty">
           <lottieVue animation="empty" />
         </div>
@@ -87,7 +91,8 @@ export default {
       msgs: null,
       currentUser: this.$route.params.id,
       currentReceiver: null,
-      users: null,
+      currentReceiverName: "",
+      users: [],
       session: false,
       search: "",
     };
@@ -134,6 +139,13 @@ export default {
     switchConversation(user_id) {
       this.currentReceiver = user_id;
     },
+    getReceiverName() {
+      this.users.forEach((element) => {
+        if (element.user_id == this.currentReceiver) {
+          this.currentReceiverName = element.full_name;
+        }
+      });
+    },
     goToBottom() {
       this.$refs["bottom"].scrollIntoView({ behavior: "smooth" });
     },
@@ -162,6 +174,7 @@ export default {
         });
     },
     getMessages() {
+      this.getReceiverName();
       chatService
         .getMessages(this.currentReceiver, this.currentUser)
         .then((response) => {
@@ -272,8 +285,19 @@ export default {
 </script>
 
 <style>
+.converstaionAvatar {
+  width: 42px;
+  height: 42px;
+}
+.msg-header {
+  height: 50px;
+  width: 100%;
+  border: none;
+  background-color: white;
+  opacity: 0.6;
+}
 .empty {
-  width: 40vh;
+  width: 38vh;
   margin-top: 20vh;
 }
 .deleteIcon {
@@ -385,7 +409,7 @@ p {
   }
 
   .messages {
-    height: 93.4vh;
+    height: 83.8vh;
   }
 
   .info {
@@ -399,7 +423,7 @@ p {
     width: 70vw;
   }
   .messages {
-    height: 85.6vh;
+    height: 79vh;
   }
 }
 
