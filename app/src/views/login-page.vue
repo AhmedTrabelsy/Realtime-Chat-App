@@ -60,11 +60,12 @@ export default {
         userService
           .getUser(this.email, this.password)
           .then((response) => {
-            this.authorised = response.data.session;
+            this.authorised = response.data.user_id;
+            console.log(typeof response.data);
             if (this.authorised) {
-              this.full_name = response.data.user.full_name;
-              this.email = response.data.user.email;
-              this.$router.push({ name: "chatPage", params: { id: response.data.user.user_id } });
+              this.full_name = response.data.full_name;
+              this.email = response.data.email;
+              this.$router.push({ name: "chatPage", params: { id: response.data.user_id } });
               this.Toast.fire({ icon: "success", title: "Login Successfully!" });
             } else {
               this.Toast.fire({ icon: "error", title: "Please Verify Your Informations" });
