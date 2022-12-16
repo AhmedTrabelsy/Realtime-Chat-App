@@ -11,7 +11,7 @@ $data = json_decode(file_get_contents("php://input"));
 $currentUser = $data->currentUser;
 $search = $data->search;
 
-$sql = "SELECT full_name FROM users WHERE user_id != '$currentUser' AND Upper(full_name) LIKE('%$search%');";
+$sql = "SELECT user_id, full_name FROM users WHERE user_id != '$currentUser' AND Upper(full_name) LIKE('%$search%');";
 //prepare for variables in sql query : plus de sécurité
 $reponse = $db->prepare($sql);
 $reponse->execute();

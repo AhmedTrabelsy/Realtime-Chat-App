@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2022 at 11:59 PM
+-- Generation Time: Dec 16, 2022 at 10:36 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -39,9 +39,13 @@ CREATE TABLE `chats` (
 --
 
 INSERT INTO `chats` (`message_id`, `sender_id`, `receiver_id`, `message`) VALUES
-(145, 1, 1, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit, tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit, quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos  sapiente officiis modi at sunt excepturi expedita sint? Sed quibusdam recusandae alias error harum maxime adipisci amet laborum. Perspiciatis  minima nesciunt dolorem! Officiis iure rerum voluptates a cumque velit  quibusdam sed amet tempora. Sit laborum ab, eius fugit doloribus tenetur  fugiat, temporibus enim commodi iusto libero magni deleniti quod quam  consequuntur! Commodi minima excepturi repudiandae velit hic maxime doloremque. Quaerat provident commodi consectetur veniam similique ad  earum omnis ipsum saepe, voluptas, hic voluptates pariatur est explicabo  fugiat, dolorum eligendi quam cupiditate excepturi mollitia maiores labore  suscipit quas? Nulla, placeat. Voluptatem quaerat non architecto ab laudantium modi minima sunt esse temporibus sint culpa, recusandae aliquam numquam  totam ratione voluptas quod exercitationem fuga. Possimus quis earum veniam  quasi aliquam eligendi, placeat qui corporis!'),
-(179, 7, 1, 'Sounds good !'),
-(180, 6, 1, 'What are you talking about guys 😂😂😂😂😂');
+(215, 7, 1, 'Hello'),
+(217, 27, 1, 'Bonjour ! 😊'),
+(219, 29, 1, 'hello !'),
+(220, 1, 29, 'hhi'),
+(221, 1, 29, 'qsfdfd'),
+(222, 1, 29, 'sqdfqsdf'),
+(223, 29, 1, 'qsdflkjskldf');
 
 -- --------------------------------------------------------
 
@@ -61,9 +65,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `full_name`, `email`, `password`) VALUES
-(1, 'Ahmed Trabelsi', 'trabelsig@gmail.co', '00000000'),
-(6, 'Walter Hicks', 'walter@gmail.com', 'walter@gmail.com'),
-(7, 'Kane Fritz', 'kane@gmail.com', 'kane@gmail.com');
+(1, 'Ahmed Trabelsi', 'trabelsig37@gmail.com', '00000000'),
+(7, 'Kane Fritz', 'kane@gmail.com', '00000000'),
+(27, 'Guest User', 'guest@gmail.com', '00000000'),
+(29, 'Mohamed Ouali', 'ouali@gmail.com', '00000000');
 
 --
 -- Indexes for dumped tables
@@ -91,13 +96,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `chats`
 --
 ALTER TABLE `chats`
-  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=236;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Constraints for dumped tables
