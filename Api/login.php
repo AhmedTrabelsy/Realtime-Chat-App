@@ -19,15 +19,11 @@ $reponse->execute();
 
 $user = $reponse->fetch(PDO::FETCH_ASSOC);
 if (isset($user)) {
-    session_start();
-    $_SESSION['user_id'] = $user['user_id'];
-    $_SESSION['full_name'] = $user['full_name'];
-    $_SESSION['email'] = $user['email'];
-    $_SESSION['password'] = $user['password'];
-    $data = array();
-    $data['user'] = $user;
-    $data['session'] = true;
+    // session_start();
+    // $_SESSION['user_id'] = $user['user_id'];
+    // $_SESSION['full_name'] = $user['full_name'];
+    // $_SESSION['email'] = $user['email'];
+    // $_SESSION['password'] = $user['password'];
 }
 
-
-echo json_encode($data);
+echo json_encode($user);
