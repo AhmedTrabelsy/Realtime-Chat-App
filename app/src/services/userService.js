@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://localhost/Api/",
+  baseURL: "/Api/",
   withCredentials: false,
   headers: {
     Accept: "application/json",
@@ -47,10 +47,4 @@ export default {
     };
     return apiClient.post("updateUser.php", data);
   },
-  // addChat(event) {
-  //   return apiClient.post("addEvent.php", event);
-  // },
-  // deleteEvent(id) {
-  //   return apiClient.delete("deleteEvent.php?id=" + id);
-  // },
 };
