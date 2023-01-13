@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://localhost/Api/",
+  baseURL: "lkqsddf",
   withCredentials: false,
   headers: {
     Accept: "application/json",
